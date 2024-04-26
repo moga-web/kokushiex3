@@ -1,0 +1,37 @@
+name: Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3.0'
+        bundler-cache: true
+
+    - name: Install Dependencies
+      run: |
+        gem install bundler
+        bundle install
+
+    - name: RuboCop
+      run: bundle exec rubocop
+
+    - name: ERBLint
+      run: bundle exec erblint --lint-all
+
+    - name: Set up Database
+      run: |
+        bin/rails db:create
+        bin/rails db:schema:load
+        bin/rails db:migrate
+
+    - name: Precompile assets
+      run: bin/rails assets:precompile
+
+    - name: Run Tests
+      run: bundle exec rspec
