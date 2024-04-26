@@ -1,37 +1,46 @@
 name: Test
+
 on: [push]
+
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8.3
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+        ports:
+          - 3306:3306
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.3.1'
-        bundler-cache: true
+    - name: Build Docker container
+      run: docker-compose build
 
-    - name: Install Dependencies
-      run: |
-        gem install bundler
-        bundle install
-
-    - name: RuboCop
-      run: bundle exec rubocop
-
-    - name: ERBLint
-      run: bundle exec erblint --lint-all
+    - name: Run Docker container
+      run: docker-compose up -d
 
     - name: Set up Database
       run: |
-        bin/rails db:create
-        bin/rails db:schema:load
-        bin/rails db:migrate
+        docker-compose exec -T db mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS app_test;"
+        docker-compose exec -T web bin/rails db:schema:load
+        docker-compose exec -T web bin/rails db:migrate
+
+    - name: RuboCop
+      run: docker-compose exec -T web bundle exec rubocop
+
+    - name: ERBLint
+      run: docker-compose exec -T web bundle exec erblint --lint-all
 
     - name: Precompile assets
-      run: bin/rails assets:precompile
+      run: docker-compose exec -T web bin/rails assets:precompile
 
-    - name: Run Tests
-      run: bundle exec rspec
+    - name: Rspec
+      run: docker-compose exec -T web bundle exec rspec
