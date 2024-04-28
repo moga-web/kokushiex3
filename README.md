@@ -1,4 +1,12 @@
 # README
+## サービス概要
+サービス名：国試exforPT
+## 概要
+国試exforPTはオンライン上で理学療法士国家試験の過去問を受験できるサービスです。
+- ユーザーはユーザー登録なしで受験できます
+- 過去問は年度別、午前問題、午後問題等絞り込んで受験することもできます
+- ユーザー登録したユーザーは受験結果の詳細なレポートを確認できます
+- 受験結果を共有することができます
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

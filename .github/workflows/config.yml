@@ -3,44 +3,106 @@ name: Test
 on: [push]
 
 jobs:
-  build-and-test:
+  rspec:
     runs-on: ubuntu-latest
     services:
       db:
         image: mysql:8.3
-        env:
-          MYSQL_ROOT_PASSWORD: password
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
         ports:
-          - 3307:3306
-
+          - 3306:3306
+        env:
+          TZ: "Asia/Tokyo"
+          MYSQL_ROOT_PASSWORD: password
+          options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+      container:
+        image: ruby:3.3.1
+        env:
+          RAILS_ENV: test
     steps:
-    - uses: actions/checkout@v2
+        - uses: actions/checkout@v2
+        - name: bundler config
+          run: bundle config set path 'vendor/bundle'
+        - name: cache gems
+          id: cache-gems
+          uses: actions/cache@v2
+          with:
+            path: vendor/bundle
+            key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-gems-
+        - name: setup bundle
+          if: steps.cache-gems.outputs.cache-hit != 'true'
+          run: |
+            bundle install --jobs 4 --retry 3
+        - name: Use Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: '18.x'
+        - name: setup yarn
+          run: |
+            npm install -g yarn
+        - name: cache yarn
+          uses: actions/cache@v2
+          id: yarn-cache
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+                ${{ runner.os }}-yarn-
+        - name: yarn install
+          if: steps.yarn-cache.outputs.cache-hit != 'true'
+          run: yarn install --check-files
+        - name: build js
+          run: yarn build
+        - name: build css
+          run: yarn build:css
+        - name: setup db schema
+          run: |
+            bin/rails db:create
+            bin/rails db:migrate
+        - name: run spec
+          run: bundle exec rspec  
+        
+  rubocop:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.3.1
+    steps:
+      - uses: actions/checkout@v2
+      - name: bundler config
+        run: bundle config set path 'vendor/bundle'
+      - name: Cache gems
+        id: cache-gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: setup bundle
+        if: steps.cache-gems.outputs.cache-hit != 'true'
+        run: bundle install --jobs 4 --retry 3
+      - name: run rubocop
+        run: bundle exec rubocop
 
-    - name: Build Docker container
-      run: docker-compose build
-
-    - name: Run Docker container
-      run: docker-compose up -d
-
-    - name: Set up Database
-      run: |
-        docker-compose exec -T db mysql -uroot -ppassword -e "CREATE DATABASE IF NOT EXISTS app_test;"
-        docker-compose exec -T web bin/rails db:schema:load
-        docker-compose exec -T web bin/rails db:migrate
-
-    - name: RuboCop
-      run: docker-compose exec -T web bundle exec rubocop
-
-    - name: ERBLint
-      run: docker-compose exec -T web bundle exec erblint --lint-all
-
-    - name: Precompile assets
-      run: docker-compose exec -T web bin/rails assets:precompile
-
-    - name: Rspec
-      run: docker-compose exec -T web bundle exec rspec
+  erblint:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.3.1
+    steps:
+      - uses: actions/checkout@v2
+      - name: bundler config
+        run: bundle config set path 'vendor/bundle'
+      - name: Cache gems
+        id: cache-gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: setup bundle
+        if: steps.cache-gems.outputs.cache-hit != 'true'
+        run: bundle install --jobs 4 --retry 3
+      - name: run erblint
+        run: bundle exec erblint .
