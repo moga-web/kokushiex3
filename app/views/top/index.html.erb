@@ -1,3 +1,39 @@
-<div data-controller="hello">
-    <h1>top#index</h1>
+<div class='flex flex-col items-center text-gray-600 min-h-screen pt-40 mx-auto'>
+    <!-- imageセクション -->
+    <div class='w-full max-w-4xl text-center'>
+        <%= image_tag 'top.png', class: 'mx-auto' %>
+        <h1 class='text-4xl font-bold'>理学療法士国家試験をスマートに合格しよう</h1>
+        <div class='mt-4 space-x-20'>
+            <div class='inline-block bg-sky-100 text-gray-700 hover:bg-sky-500 hover:text-orange-300 font-bold py-2 px-4 rounded-lg shadow-xl'>
+                <%= link_to 'ログイン', '#' %>
+            </div>
+            <div class='inline-block bg-sky-100 text-gray-700 hover:bg-sky-500 hover:text-orange-300 font-bold py-2 px-4 rounded-lg shadow-xl'>
+                <%= link_to '無料会員登録', '#' %>
+            </div>
+        </div>
+    </div>
+
+    <!-- descriptセクション -->
+    <div class='w-full max-w-4xl mt-4 justify-center'>
+        <div class='overflow-hidden'>
+            <div class='m-2'>
+                <h1 class='text-xl font-bold'>国試ex for PTとは</h1>
+                <p class='mt-4'>理学療法士国家試験対策のための学習支援アプリです</p>
+                <div class='flex flex-row justify-center sm:flex-row mt-4'>
+                    <div class='flex flex-col items-center p-2 m-4 border-2 border-gray-200 border-opacity-60 rounded-lg shadow-xl'>
+                        <%= image_tag 'books.png', size: 80, class: 'mx-auto' %>
+                        <p class='mt-2'>過去10年分の理学療法士国家試験に対応</p>
+                    </div>
+                    <div class='flex flex-col items-center p-2 m-4 border-2 border-gray-200 border-opacity-60 rounded-lg shadow-xl'>
+                        <%= image_tag 'laptop.png', size: 80, class: 'mx-auto' %>
+                        <p class='mt-2'>インターネット環境があればどこでも学習可能</p>
+                    </div>
+                    <div class='flex flex-col items-center p-2 m-4 border-2 border-gray-200 border-opacity-60 rounded-lg shadow-xl'>
+                        <%= image_tag 'analysis.png', size: 80, class: 'mx-auto' %>
+                        <p class='mt-2'>採点の手間が省け、過去問の受験データをもとに学習可能</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
