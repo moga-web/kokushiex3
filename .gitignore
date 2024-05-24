@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/db/mysql/volumes/*
+/db/mysql/volumes/**
 /log/*
 /tmp/*
 !/log/.keep
