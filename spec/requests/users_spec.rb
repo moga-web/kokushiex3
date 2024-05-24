@@ -15,7 +15,7 @@ RSpec.describe "Users", type: :request do
         expect {
           post user_registration_path, params: user_params
         }.to change(User, :count).by(1)
-        expect(response).to redirect_to(dashbord_path) 
+        expect(response).to redirect_to(dashboard_path) 
       end
     end
 
