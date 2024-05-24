@@ -10,7 +10,7 @@ RSpec.describe "Users", type: :request do
 
   describe "POST /users/sign_up" do
     context '正常系' do
-      it 'ユーザー登録ができる' do
+      it 'ユーザー登録後ダッシュボード画面にリダイレクトされる' do
         user_params = { user: { username: 'newuser', email: 'newuser@example.com', password: 'password', password_confirmation: 'password' } }
         expect {
           post user_registration_path, params: user_params
@@ -20,7 +20,7 @@ RSpec.describe "Users", type: :request do
     end
 
     context '不正なパラメータの場合' do
-      it 'ユーザー登録ができない' do
+      it 'ユーザー登録ができず新規登録画面にリダイレクトされる' do
         user_params = { user: { username: '', email: 'user@example.com', password: 'password', password_confirmation: 'password' } }
         expect {
           post user_registration_path, params: user_params
