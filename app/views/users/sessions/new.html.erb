@@ -1,26 +1,40 @@
-<h2><%= t('.sign_in') %></h2>
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
-  </div>
+  <%= form_with(model: resource, as: resource_name, url: user_session_path(resource_name),
+                method: :post, local: true, html: { class: 'mt-8 space-y-6 sm:mx-auto sm:w-full sm:max-w-md' }) do |f| %>
+    <%= render 'devise/shared/error_messages', resource: %>
 
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password, autocomplete: 'current-password' %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="space-y-4">
+      <div>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email',
+                                  placeholder: t('devise.registrations.new.email'),
+                                  class: 'appearance-none rounded-md relative block w-full px-3 py-2 border
+                                          border-gray-300 text-gray-900 placeholder-gray-500
+                                          focus:outline-none focus:ring-sky-500 focus:border-sky-500
+                                          sm:text-sm sm:leading-5' %>
+      </div>
+      <div>
+        <%= f.password_field :password, autocomplete: 'current-password',
+                                        placeholder: t('devise.registrations.new.password'),
+                                        class: 'appearance-none rounded-md relative block w-full px-3 py-2
+                                                border border-gray-300 text-gray-900 placeholder-gray-500
+                                                focus:outline-none focus:ring-sky-500 focus:border-sky-500
+                                                sm:text-sm sm:leading-5' %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+      <div class="actions bg-sky-100 text-gray-700 hover:bg-sky-500 hover:text-orange-300 font-bold py-2 px-4 rounded-lg shadow-xl text-center">
+        <%= f.submit 'ログイン' %>
+      </div>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit t('.sign_in') %>
+  <div class="m-5">
+    <p class="text-center text-gray-900">
+      パスワードを忘れた場合は<%= link_to 'こちら', new_password_path(resource_name), class: 'text-sky-500 hover:text-orange-300' %>
+    </p>
   </div>
-<% end %>
-
-<%= render 'users/shared/links' %>
+</div>
