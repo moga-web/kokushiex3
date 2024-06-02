@@ -1,6 +1,6 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
-  <%= form_with(model: resource, as: resource_name, url: user_session_path(resource_name),
+  <%= form_with(model: resource, as: resource_name, url: user_session_path,
                 method: :post, local: true, html: { class: 'mt-8 space-y-6 sm:mx-auto sm:w-full sm:max-w-md' }) do |f| %>
     <%= render 'devise/shared/error_messages', resource: %>
 
