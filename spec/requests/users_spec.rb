@@ -9,23 +9,49 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "POST /users/sign_up" do
+    let(:valid_user_params) { { user: { username: 'newuser', email: 'newuser@example.com', password: 'password', password_confirmation: 'password' } } }
+    let(:invalid_user_params) { { user: { username: '', email: 'user@example.com', password: 'password', password_confirmation: 'password' } } }
+
     context '正常系' do
       it 'ユーザー登録後ダッシュボード画面にリダイレクトされる' do
-        user_params = { user: { username: 'newuser', email: 'newuser@example.com', password: 'password', password_confirmation: 'password' } }
         expect {
-          post user_registration_path, params: user_params
+          post user_registration_path, params: valid_user_params
         }.to change(User, :count).by(1)
-        expect(response).to redirect_to(dashboard_path) 
+        expect(response).to redirect_to(dashboard_path)
+        expect(response).to have_http_status(:see_other)
       end
     end
 
     context '不正なパラメータの場合' do
       it 'ユーザー登録ができず新規登録画面にリダイレクトされる' do
-        user_params = { user: { username: '', email: 'user@example.com', password: 'password', password_confirmation: 'password' } }
         expect {
-          post user_registration_path, params: user_params
+          post user_registration_path, params: invalid_user_params
         }.not_to change(User, :count)
         expect(response).to render_template(:new)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe "POST /users/sign_in" do
+    let(:user) { User.create(username: 'testuser', email: 'testuser@example.com', password: 'password', password_confirmation: 'password') }
+    let(:valid_login_params) { { user: { email: 'testuser@example.com', password: 'password' } } }
+    let(:invalid_login_params) { { user: { email: 'testuser@example.com', password: '123456789' } } }
+
+    context '正常系' do
+      it 'ログイン後ダッシュボード画面にリダイレクトされる' do
+        user
+        post user_session_path, params: valid_login_params
+        expect(response).to redirect_to(dashboard_path)
+        expect(response).to have_http_status(:see_other)
+      end
+    end
+
+    context '不正なパラメータの場合' do
+      it 'ログインができずログイン画面にリダイレクトされる' do
+        post user_session_path, params: invalid_login_params
+        expect(response).to render_template(:new)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

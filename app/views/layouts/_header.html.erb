@@ -15,16 +15,16 @@
             <%= link_to '過去問演習', '#' %>
         </div>
         <!-- パスができたら修正 -->
-        <% if false %>
+        <% if user_signed_in? %>
             <div class="mr-5 hover:text-orange-300">
-                <%= button_to 'ログアウト', '#', method: :delete, data: { turbo_method: :delete } %>
+                <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
             </div>
             <div class="mr-5 hover:text-orange-300">
                 <%= link_to 'マイページ', '#' %>
             </div>
         <% else %>
             <div class="mr-5 hover:text-orange-300">
-                <%= link_to 'ログイン', '#' %>
+                <%= link_to 'ログイン', new_user_session_path %>
             </div>
         <% end %>
     </nav>
