@@ -62,6 +62,7 @@ group :development, :test do
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
+  gem 'letter_opener_web'
 end
 
 group :development do
