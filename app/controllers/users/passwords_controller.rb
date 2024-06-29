@@ -23,7 +23,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # protected
 
-  def after_resetting_password_path_for(resource)
+  def after_resetting_password_path_for(_resource)
     dashboard_path
   end
 
