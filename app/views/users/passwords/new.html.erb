@@ -20,4 +20,10 @@
         <%= f.submit '再設定用リンクを送信' %>
     </div>
   <% end %>
+  <div class="m-5">
+    <p class="text-center text-gray-900">
+      すでにアカウントをお持ちですか？<%= link_to 'ログイン', new_user_session_path, class: 'text-sky-500 hover:text-orange-300' %>
+    </p>
+  </div>
+  <%= render 'users/shared/links' %>
 </div>
