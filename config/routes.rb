@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   root to: 'top#index'
   get '/dashboard' => 'dashboard#index'
 
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
