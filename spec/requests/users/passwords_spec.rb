@@ -31,7 +31,7 @@ RSpec.describe 'Users::passwords' do
   end
 
   describe 'PUT /users/password' do
-    let(:reset_password_token) { user.send_reset_password_instructions }
+    let(:reset_password_token) { user.send(:set_reset_password_token) }
     let(:params) do
       {
         user: {
@@ -45,7 +45,7 @@ RSpec.describe 'Users::passwords' do
     it 'パスワードが更新される' do
       put('/users/password', params:)
       user.reload
-      expect(user.valid_password?('newpassword')).to be true
+      expect(user.valid_password?('new-password')).to be true
       expect(user.reset_password_token).to be_nil
     end
   end
