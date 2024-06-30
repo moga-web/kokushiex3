@@ -59,6 +59,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_inactive_sign_up_path_for(_resource)
     edit_user_registration_path
   end
-
-  
 end
