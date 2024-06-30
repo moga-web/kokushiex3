@@ -1,8 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
-  
-
+RSpec.describe 'Users::sessions' do
   describe "POST /users/sign_in" do
     let(:user) { User.create(username: 'testuser', email: 'testuser@example.com', password: 'password', password_confirmation: 'password') }
     let(:valid_login_params) { { user: { email: 'testuser@example.com', password: 'password' } } }
