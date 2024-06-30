@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   root to: 'top#index'
   get '/dashboard' => 'dashboard#index'
+  #　TODO：registrationのeditをaccountにしたい
   get '/account' => 'accounts#show'
 
   if Rails.env.development?
