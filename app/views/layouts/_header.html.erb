@@ -20,7 +20,7 @@
                 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
             </div>
             <div class="mr-5 hover:text-orange-300">
-                <%= link_to 'マイページ', '#' %>
+                <%= link_to 'マイページ', account_path %>
             </div>
         <% else %>
             <div class="mr-5 hover:text-orange-300">
