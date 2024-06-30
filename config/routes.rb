@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'accounts/show'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
   
   root to: 'top#index'
   get '/dashboard' => 'dashboard#index'
+  #　TODO：registrationのeditをaccountにしたい
+  get '/account' => 'accounts#show'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
