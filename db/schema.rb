@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_01_111120) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_01_111906) do
+  create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "test_id", null: false
+    t.integer "question_number", null: false
+    t.string "content", null: false
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_questions_on_test_id"
+  end
+
   create_table "tests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "year", null: false
     t.string "session", null: false
@@ -38,4 +48,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_01_111120) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "questions", "tests"
 end

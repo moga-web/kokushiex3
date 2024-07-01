@@ -11,4 +11,8 @@
 #
 class Test < ApplicationRecord
   has_many :questions, dependent: :destroy
+
+  validates :pass_mark, presence: true
+  validates :session, presence: true, inclusion: { in: %w(AM PM)}
+  validates :year, presence: true
 end
