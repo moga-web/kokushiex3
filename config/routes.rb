@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#index'
   #　TODO：registrationのeditをaccountにしたい
   get '/account' => 'accounts#show'
+
   namespace :tests do
-    get '/tests/select' => 'selections/index'
+    get '/select' => 'selections#index'
   end
 
   if Rails.env.development?
