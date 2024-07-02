@@ -1,17 +1,17 @@
 <div class='flex flex-wrap body-font'>
   <div class='w-full max-w-4xl m-auto'>
-    <div data-controller="tab" class='mb-10'>
+    <div data-controller="tab" class='mb-10 mt-5'>
       <div class="flex">
-        <button data-action="tab#switchingExamTypes" class='bg-gray-300 text-black font-bold py-2 px-4 rounded'>
+        <button data-action="tab#showYearTypes" class='bg-sky-100 text-black font-bold py-2 px-4 rounded'>
           模試形式
         </button>
-        <button data-action="tab#switchingExamTypes" class='bg-gray-300 text-black font-bold py-2 px-4 rounded'>
+        <button data-action="tab#showTagTypes" class='bg-purple-300 text-black font-bold py-2 px-4 rounded'>
           小テスト形式
         </button>
       </div>
 
       <!-- 年度選択 -->
-      <div data-tab-target="year" type="details" class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
+      <div data-tab-target="year" class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
         <div class='m-5'>
           <div class='mt-3 flex items-center'>
             <%= image_tag 'calendar.png', size: 50 %>
@@ -35,7 +35,7 @@
 
           <div class='mt-3 grid gap-3'>
             <%= button_to '解剖学', '#',
-                          class: 'mt-3 bg-stone-100 text-sky-500 hover:bg-sky-500 hover:text-stone-300 font-bold
+                          class: 'mt-3 bg-stone-100 text-purple-500 hover:bg-purple-500 hover:text-stone-200 font-bold
                           py-2 px-4 rounded-full shadow-xl text-center', method: :get %>
           </div>
         </div>

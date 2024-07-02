@@ -12,5 +12,15 @@ export default class extends Controller {
     this.yearTarget.classList.toggle('hidden');
     this.tagTarget.classList.toggle('hidden');
   }
+
+  showYearTypes() {
+    this.yearTarget.classList.remove('hidden');
+    this.tagTarget.classList.add('hidden');
+  }
+
+  showTagTypes() {
+    this.yearTarget.classList.add('hidden');
+    this.tagTarget.classList.remove('hidden');
+  }
 }
 
