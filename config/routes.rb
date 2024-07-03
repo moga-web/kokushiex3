@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   #　TODO：registrationのeditをaccountにしたい
   get '/account' => 'accounts#show'
 
+  get '/tests/:id' => 'tests#show', as: 'test'
   namespace :tests do
     get '/select' => 'selections#index'
   end
