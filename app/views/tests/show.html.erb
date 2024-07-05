@@ -1,4 +1,50 @@
-<div>
-  <h1 class="font-bold text-4xl">Tests#show</h1>
-  <p>Find me in app/views/tests/show.html.erb</p>
+<!-- 問題登録後パーシャル化 -->
+<div class='flex flex-wrap flex-grow text-gray-600 body-font'>
+  <div class='w-full max-w-4xl m-auto'>
+    <div class='flex mb-10'>
+      <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
+        <div class='m-5'>
+          <!-- 問題番号 -->
+          <div class='font-bold'><%= @test.year %><%= @test.session %><%= @question.question_number %></div>
+          <!-- 問題文 -->
+          <div class='m-5'>
+            <%= @question.content %>
+          </div>
+          <!-- 図 -->
+          <div class='flex justify-center'>
+            <%= image_tag "/#{@question.image_url}", size: 500 %>
+          </div>
+          <!-- 選択肢 -->
+          <div>
+            <ul>
+              <li>
+                <div class='flex items-center ps-3'>
+                  <input id='select-1' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
+                  <label for='select-1' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢1</label>
+                </div>
+              </li>
+              <li>
+                <div class='flex items-center ps-3'>
+                  <input id='select-2' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
+                  <label for='select-2' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢2</label>
+                </div>
+              </li>
+              <li>
+                <div class='flex items-center ps-3'>
+                  <input id='select-3' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
+                  <label for='select-3' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢3</label>
+                </div>
+              </li>
+              <li>
+                <div class='flex items-center ps-3'>
+                  <input id='select-4' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
+                  <label for='select-4' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢4</label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
