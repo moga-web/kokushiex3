@@ -1,6 +1,6 @@
 class TestsController < ApplicationController
   def show
-    @test = Test.find(1)
-    @question = Question.find(1)
+    @test = Test.find(params[:id])
+    @question = @test.questions.first
   end
 end

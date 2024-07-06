@@ -23,7 +23,6 @@ FactoryBot.define do
     test { nil }
     question_number { rand(1..100) }
     content { Faker::Lorem.sentence }
-    image_url { File.open("#{Rails.root}/db/fixtures/images/test_image.png") }
     created_at { Time.zone.now }
     updated_at { Time.zone.now }
   end
