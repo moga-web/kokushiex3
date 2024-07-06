@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :tests do
     get '/select' => 'selections#index'
   end
-  get '/tests/:id' => 'tests#show'
+  get '/tests/:id' => 'tests#show', as: 'test'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

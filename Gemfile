@@ -54,7 +54,7 @@ gem 'bootsnap', require: false
 gem 'devise'
 gem 'devise-i18n'
 
-#seed
+# seed
 gem 'seed-fu'
 
 group :development, :test do
