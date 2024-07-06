@@ -11,10 +11,10 @@
 #
 FactoryBot.define do
   factory :test do
-    year { "MyString" }
-    session { "MyString" }
-    pass_mark { 1 }
-    created_at { "2024-07-01 11:11:20" }
-    updated_at { "2024-07-01 11:11:20" }
+    year { rand(2014..2024) }
+    session { %w[AM PM].sample }
+    pass_mark { rand(150..200) }
+    created_at { Time.zone.now }
+    updated_at { Time.zone.now }
   end
 end

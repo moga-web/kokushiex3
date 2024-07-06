@@ -21,10 +21,9 @@
 FactoryBot.define do
   factory :question do
     test { nil }
-    question_number { 1 }
-    content { "MyString" }
-    image_url { "MyString" }
-    created_at { "2024-07-01 11:19:06" }
-    updated_at { "2024-07-01 11:19:06" }
+    question_number { rand(1..100) }
+    content { Faker::Lorem.sentence }
+    created_at { Time.zone.now }
+    updated_at { Time.zone.now }
   end
 end

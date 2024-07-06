@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   #　TODO：registrationのeditをaccountにしたい
   get '/account' => 'accounts#show'
 
+  
   namespace :tests do
     get '/select' => 'selections#index'
   end
+  get '/tests/:id' => 'tests#show', as: 'test'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

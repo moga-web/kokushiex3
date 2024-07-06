@@ -1,3 +1,5 @@
 class Tests::SelectionsController < ApplicationController
-  def index; end
+  def index
+    @test = Test.all
+  end
 end
