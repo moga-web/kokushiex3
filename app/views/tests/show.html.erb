@@ -1,18 +1,19 @@
 <!-- 問題登録後パーシャル化 -->
 <div class='flex flex-wrap flex-grow text-gray-600 body-font'>
   <div class='w-full max-w-4xl m-auto'>
+    <% @questions.each do |question| %>
     <div class='flex mb-10'>
       <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
         <div class='m-5'>
           <!-- 問題番号 -->
-          <div class='font-bold'><%= @test.year %><%= @test.session %><%= @question.question_number %></div>
+          <div class='font-bold'><%= @test.year %><%= @test.session %><%= question.question_number %></div>
           <!-- 問題文 -->
           <div class='m-5'>
-            <%= @question.content %>
+            <%= question.content %>
           </div>
           <!-- 図 -->
           <div class='flex justify-center'>
-            <%= image_tag "/#{@question.image_url}", size: 500 %>
+            <%= image_tag question.image_url, size: 500 %>
           </div>
           <!-- 選択肢 -->
           <div>
@@ -46,5 +47,6 @@
         </div>
       </div>
     </div>
+  <% end %>
   </div>
 </div>
