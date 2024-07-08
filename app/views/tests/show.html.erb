@@ -18,30 +18,14 @@
           <!-- 選択肢 -->
           <div>
             <ul>
-              <li>
-                <div class='flex items-center ps-3'>
-                  <input id='select-1' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
-                  <label for='select-1' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢1</label>
-                </div>
-              </li>
-              <li>
-                <div class='flex items-center ps-3'>
-                  <input id='select-2' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
-                  <label for='select-2' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢2</label>
-                </div>
-              </li>
-              <li>
-                <div class='flex items-center ps-3'>
-                  <input id='select-3' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
-                  <label for='select-3' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢3</label>
-                </div>
-              </li>
-              <li>
-                <div class='flex items-center ps-3'>
-                  <input id='select-4' type='checkbox' value='' class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500'>
-                  <label for='select-4' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'>選択肢4</label>
-                </div>
-              </li>
+              <% question.choices.each_with_index do |choice, index| %>
+                <li>
+                  <div class='flex items-center ps-3'>
+                    <%= check_box_tag "response[choice_ids][]", choice.id, false, id: "select-#{question.id}-#{index + 1}", class: 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
+                    <label for='select-<%= question.id %>-<%= index + 1 %>' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'><%= choice.content %></label>
+                  </div>
+                </li>
+              <% end %>
             </ul>
           </div>
         </div>
