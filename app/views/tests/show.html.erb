@@ -7,7 +7,7 @@
       <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
         <div class='m-5'>
           <!-- 問題番号 -->
-          <div class='font-bold'><%= @test.year %><%= @test.session %><%= question.question_number %></div>
+          <div class='font-bold'><%= @test.decorate.question_code(question) %></div>
           <!-- 問題文 -->
           <div class='m-5'>
             <%= question.content %>
@@ -21,10 +21,14 @@
             <ul>
               <% question.choices.each_with_index do |choice, index| %>
                 <li>
-                  <div class='flex items-center ps-3'>
-                    # check_box_tag を使用することで、各質問ごとに識別して名前空間を持たせる
-                    <%= check_box_tag "response[choice_ids][]", choice.id, false, id: "select-#{question.id}-#{index + 1}", class: 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
-                    <label for='select-<%= question.id %>-<%= index + 1 %>' class='w-full py-3 ms-2 text-sm font-medium text-gray-900'><%= choice.content %></label>
+                  <div class='flex items-center ps-3 mb-2'>
+                    <%# check_box_tag を使用することで、各質問ごとに識別して名前空間を持たせる %>
+                    <%= check_box_tag 'response[choice_ids][]', choice.id, false,
+                                      id: "select-#{question.id}-#{index + 1}",
+                                      class: 'w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
+                    <label for='select-<%= question.id %>-<%= index + 1 %>'>
+                      <span class="w-full py-3 ms-2 text-base font-medium text-gray-900"><%= choice.content %></span>
+                    </label>
                   </div>
                 </li>
               <% end %>
@@ -38,6 +42,7 @@
 </div>
 <% end %>
 <div class="text-center justify-center">
-    <%= submit_tag 'テストを終了する', class: 'bg-sky-100 text-gray-700 hover:bg-sky-500 hover:text-orange-300 font-bold py-2 px-4 rounded-lg shadow-xl' %>
+    <%= submit_tag 'テストを終了する',
+                   class: 'bg-sky-100 text-gray-700 hover:bg-sky-500 hover:text-orange-300
+                    font-bold py-2 px-4 rounded-lg shadow-xl' %>
 </div>
-

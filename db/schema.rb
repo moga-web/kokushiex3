@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_07_115400) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_07_113907) do
   create_table "choices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "content", null: false
