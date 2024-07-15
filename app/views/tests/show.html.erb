@@ -14,7 +14,10 @@
           </div>
           <!-- 図 -->
           <div class='flex justify-center'>
-            <%= image_tag "/#{question.image_url}", size: 500 %>
+            <% if question.image_url.present? %>
+              <%= image_tag "/#{question.image_url}",
+                            style: 'max-width: 500px; max-height: 500px; width: auto; height: auto;' %>
+            <% end %>
           </div>
           <!-- 選択肢 -->
           <div>
