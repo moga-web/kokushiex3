@@ -17,5 +17,4 @@ class UserResponsesController < ApplicationController
 
     redirect_to dashboard_path, notice: '試験結果を保存しました'
   end
-  end
 end
