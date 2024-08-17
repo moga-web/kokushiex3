@@ -1,48 +1,49 @@
 <!-- 問題登録後パーシャル化 -->
 <%= form_with url: user_responses_path, method: :post do %>
-<div class='flex flex-wrap flex-grow text-gray-600 body-font'>
-  <div class='w-full max-w-4xl m-auto'>
-    <% @questions.each do |question| %>
-    <div class='flex mb-10'>
-      <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
-        <div class='m-5'>
-          <!-- 問題番号 -->
-          <div class='font-bold'><%= @test.decorate.question_code(question) %></div>
-          <!-- 問題文 -->
+  <%= hidden_field_tag :test_id, @test.id %>
+  <div class='flex flex-wrap flex-grow text-gray-600 body-font'>
+    <div class='w-full max-w-4xl m-auto'>
+      <% @questions.each do |question| %>
+      <div class='flex mb-10'>
+        <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
           <div class='m-5'>
-            <%= question.content %>
-          </div>
-          <!-- 図 -->
-          <div class='flex justify-center'>
-            <% if question.image_url.present? %>
-              <%= image_tag "/#{question.image_url}",
-                            style: 'max-width: 500px; max-height: 500px; width: auto; height: auto;' %>
-            <% end %>
-          </div>
-          <!-- 選択肢 -->
-          <div>
-            <ul>
-              <% question.choices.each_with_index do |choice, index| %>
-                <li>
-                  <div class='flex items-center ps-3 mb-2'>
-                    <%# check_box_tag を使用することで、各質問ごとに識別して名前空間を持たせる %>
-                    <%= check_box_tag 'response[choice_ids][]', choice.id, false,
-                                      id: "select-#{question.id}-#{index + 1}",
-                                      class: 'w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
-                    <label for='select-<%= question.id %>-<%= index + 1 %>'>
-                      <span class="w-full py-3 ms-2 text-base font-medium text-gray-900"><%= choice.content %></span>
-                    </label>
-                  </div>
-                </li>
+            <!-- 問題番号 -->
+            <div class='font-bold'><%= @test.decorate.question_code(question) %></div>
+            <!-- 問題文 -->
+            <div class='m-5'>
+              <%= question.content %>
+            </div>
+            <!-- 図 -->
+            <div class='flex justify-center'>
+              <% if question.image_url.present? %>
+                <%= image_tag "/#{question.image_url}",
+                              style: 'max-width: 500px; max-height: 500px; width: auto; height: auto;' %>
               <% end %>
-            </ul>
+            </div>
+            <!-- 選択肢 -->
+            <div>
+              <ul>
+                <% question.choices.each_with_index do |choice, index| %>
+                  <li>
+                    <div class='flex items-center ps-3 mb-2'>
+                      <%# check_box_tag を使用することで、各質問ごとに識別して名前空間を持たせる %>
+                      <%= check_box_tag 'response[choice_ids][]', choice.id, false,
+                                        id: "select-#{question.id}-#{index + 1}",
+                                        class: 'w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
+                      <label for='select-<%= question.id %>-<%= index + 1 %>'>
+                        <span class="w-full py-3 ms-2 text-base font-medium text-gray-900"><%= choice.content %></span>
+                      </label>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+    <% end %>
     </div>
-  <% end %>
   </div>
-</div>
 <% end %>
 <div class="text-center justify-center">
     <%= submit_tag 'テストを終了する',
