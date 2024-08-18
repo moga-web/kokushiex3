@@ -21,4 +21,21 @@
 class UserResponse < ApplicationRecord
   belongs_to :examination
   belongs_to :choice
+
+  # insert_allではバリデーションチェックができないためメソッド化
+  def self.bulk_create_responses(examination_id, choice_ids)
+    # バリデーションチェックのためダミーレコードを生成
+    attributes = choice_ids.map do |choice_id|
+      user_response = new(examination_id:, choice_id:)
+      if user_response.valid?
+        # 一括挿入用のハッシュを作成
+        { examination_id:, choice_id:, created_at: Time.current, updated_at: Time.current }
+      else
+        # 現状では1つでもエラーが発生すると1つもcreateされない
+        Rails.logger.error "Failed to save UserResponse: #{user_response.errors.full_messages.join(', ')}"
+      end
+    end
+    # insert_allを使って一括挿入
+    UserResponse.insert_all(attributes) # rubocop:disable Rails/SkipsModelValidations
+  end
 end
