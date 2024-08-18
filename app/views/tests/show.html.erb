@@ -27,7 +27,7 @@
                   <li>
                     <div class='flex items-center ps-3 mb-2'>
                       <%# check_box_tag を使用することで、各質問ごとに識別して名前空間を持たせる %>
-                      <%= check_box_tag 'response[choice_ids][]', choice.id, false,
+                      <%= check_box_tag 'user_response[choice_ids][]', choice.id, false,
                                         id: "select-#{question.id}-#{index + 1}",
                                         class: 'w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
                       <label for='select-<%= question.id %>-<%= index + 1 %>'>

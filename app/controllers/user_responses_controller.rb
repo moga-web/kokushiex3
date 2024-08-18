@@ -1,20 +1,22 @@
 class UserResponsesController < ApplicationController
   def create
-    @examination = Examination.new(
+    @examination = Examination.create!(
       user_id: current_user.id,
       test_id: params[:test_id],
-      attempt_date: Datetime.current
+      attempt_date: DateTime.current
     )
+    unless @examination.persisted?
+      Rails.logger.error "Examination was not saved"
+      redirect_to some_path, alert: "Failed to create examination."
+      return
+    end
 
-    params[:user_responses].each do |question_id, choice_ids|
-      choice_ids.each do |choice_id|
+    params[:user_response][:choice_ids].each do |choice_id|
         UserResponse.create!(
           examination_id: @examination.id,
           choice_id: choice_id
         )
-      end
     end
-
     redirect_to dashboard_path, notice: '試験結果を保存しました'
   end
 end
