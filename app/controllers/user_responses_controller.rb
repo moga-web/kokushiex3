@@ -11,12 +11,16 @@ class UserResponsesController < ApplicationController
       return
     end
 
-    params[:user_response][:choice_ids].each do |choice_id|
-        UserResponse.create!(
-          examination_id: @examination.id,
-          choice_id: choice_id
-        )
+    user_responses = params[:user_response][:choice_ids].map do |choice_id|
+      {
+        examination_id: @examination.id,
+        choice_id: choice_id,
+        created_at: DateTime.current,
+        updated_at: DateTime.current
+      }
     end
+    
+    UserResponse.insert_all(user_responses)
     redirect_to dashboard_path, notice: '試験結果を保存しました'
   end
 end
