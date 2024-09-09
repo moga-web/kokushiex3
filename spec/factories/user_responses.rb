@@ -20,7 +20,8 @@
 #
 FactoryBot.define do
   factory :user_response do
-    examination { nil }
-    choice { nil }
+    association :examination
+    association :choice
+    
   end
 end

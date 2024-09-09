@@ -21,5 +21,35 @@
 require 'rails_helper'
 
 RSpec.describe UserResponse, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#bulk_create_responses' do
+    let(:examination) { create(:examination) }
+    let(:choice_ids) { create_list(:choice, 3).map(&:id) }
+
+    context 'when all responses are valid' do
+      it 'creates all user_responses successfully' do
+        expect {
+          UserResponse.bulk_create_responses(examination.id, choice_ids)
+        }.to change(UserResponse, :count).by(3)
+      end
+    end
+
+    context 'when one of the responses is invalid' do
+      it 'does not create any user_response' do
+        invalid_choice_id = nil
+        choice_ids_with_invalid = choice_ids + [invalid_choice_id]
+
+        expect {
+          UserResponse.bulk_create_responses(examination.id, choice_ids_with_invalid)
+        }.not_to change(UserResponse, :count)
+      end
+
+      it 'logs an error message' do
+        invalid_choice_id = nil
+        choice_ids_with_invalid = choice_ids + [invalid_choice_id]
+
+        expect(Rails.logger).to receive(:error).with(/Failed to save UserResponse/)
+        UserResponse.bulk_create_responses(examination.id, choice_ids_with_invalid)
+      end
+    end
+  end
 end

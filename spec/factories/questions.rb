@@ -20,10 +20,8 @@
 #
 FactoryBot.define do
   factory :question do
-    test { nil }
+    association :test
     question_number { rand(1..100) }
-    content { Faker::Lorem.sentence }
-    created_at { Time.zone.now }
-    updated_at { Time.zone.now }
+    content { Faker::Lorem.sentence(word_count: 3) }
   end
 end

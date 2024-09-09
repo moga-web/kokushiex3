@@ -19,8 +19,8 @@
 #
 FactoryBot.define do
   factory :choice do
-    question { nil }
-    content { "MyString" }
-    is_correct { false }
+    association :question
+    content { Faker::Lorem.sentence(word_count: 1) }
+    is_correct { Faker::Boolean.boolean }  # ランダムなtrue/falseを生成
   end
 end
