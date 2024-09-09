@@ -22,6 +22,5 @@ FactoryBot.define do
   factory :user_response do
     association :examination
     association :choice
-    
   end
 end

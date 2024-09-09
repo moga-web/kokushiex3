@@ -33,6 +33,7 @@ class UserResponse < ApplicationRecord
       else
         # 現状では1つでもエラーが発生すると1つもcreateされない
         Rails.logger.error "Failed to save UserResponse: #{user_response.errors.full_messages.join(', ')}"
+        return false
       end
     end
     # insert_allを使って一括挿入
