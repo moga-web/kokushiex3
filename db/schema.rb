@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_01_111906) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_07_113907) do
+  create_table "choices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.string "content", null: false
+    t.boolean "is_correct", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_choices_on_question_id"
+  end
+
+  create_table "examinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "test_id", null: false
+    t.datetime "attempt_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_examinations_on_test_id"
+    t.index ["user_id"], name: "index_examinations_on_user_id"
+  end
+
   create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "test_id", null: false
     t.integer "question_number", null: false
@@ -27,6 +46,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_01_111906) do
     t.integer "pass_mark", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_responses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "examination_id", null: false
+    t.bigint "choice_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["choice_id"], name: "index_user_responses_on_choice_id"
+    t.index ["examination_id"], name: "index_user_responses_on_examination_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -48,5 +76,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_01_111906) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "choices", "questions"
+  add_foreign_key "examinations", "tests"
+  add_foreign_key "examinations", "users"
   add_foreign_key "questions", "tests"
+  add_foreign_key "user_responses", "choices"
+  add_foreign_key "user_responses", "examinations"
 end

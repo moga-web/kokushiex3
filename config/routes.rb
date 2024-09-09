@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     get '/select' => 'selections#index'
   end
   get '/tests/:id' => 'tests#show', as: 'test'
+  
+  resources :user_responses, only: [:create]
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

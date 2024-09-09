@@ -57,6 +57,9 @@ gem 'devise-i18n'
 # seed
 gem 'seed-fu'
 
+# decorator
+gem 'draper'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -72,6 +75,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'annotate'
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'erb_lint', require: false
   gem 'rubocop'
   gem 'rubocop-performance', require: false
