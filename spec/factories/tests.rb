@@ -8,11 +8,11 @@
 #  updated_at :datetime         not null
 #
 FactoryBot.define do
-  factory :test do
-    year { rand(2014..2024) }
-    session { %w[AM PM].sample }
-    pass_mark { rand(150..200) }
+  year { rand(2014..2024) }
     created_at { Time.zone.now }
     updated_at { Time.zone.now }
-  end
+    
+    # 関連するtest_sessionsも同時に作成
+    after(:create) do |test|
+      create(:test_session, test: test)
 end
