@@ -8,10 +8,9 @@
 #  updated_at :datetime         not null
 #
 class Test < ApplicationRecord
-  has_many :questions, dependent: :destroy
-  has_many :examinations, dependent: :destroy
+  has_many :test_sessions, dependent: :destroy
+  has_many :pass_marks, dependent: :destroy
+  has_many :examinations, through: :test_sessions, dependent: :destroy
 
-  validates :pass_mark, presence: true
-  validates :session, presence: true, inclusion: { in: %w[AM PM] }
   validates :year, presence: true
 end
