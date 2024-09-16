@@ -1,5 +1,5 @@
 class TestSession < ApplicationRecord
-  belongs_to :test  # Testとの関連を定義
+  belongs_to :test
   has_many :examinations, dependent: :destroy
   has_many :questions, dependent: :destroy
 
