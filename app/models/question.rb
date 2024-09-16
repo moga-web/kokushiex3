@@ -19,7 +19,7 @@
 #  fk_rails_...  (test_id => tests.id)
 #
 class Question < ApplicationRecord
-  belongs_to :test
+  belongs_to :test_session
   has_many :choices, dependent: :destroy
 
   validates :content, presence: true

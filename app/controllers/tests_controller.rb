@@ -1,7 +1,8 @@
 class TestsController < ApplicationController
   def show
     @test = Test.find(params[:id]).decorate
-    @questions = @test.questions.includes(:choices)
+    @test_sessions = @test.test_sessions.includes(questions: :choices)
+    @questions = @test_sessions.questions.includes(:choices)
     # 解答を保持するためにuser_responseを持たせたいが、初回にエラーが出ないように空配列を渡す
     @user_responses = []
   end

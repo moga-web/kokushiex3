@@ -10,8 +10,6 @@
 FactoryBot.define do
   factory :test do
     year { rand(2014..2024) }
-    session { %w[AM PM].sample }
-    pass_mark { rand(150..200) }
     created_at { Time.zone.now }
     updated_at { Time.zone.now }
   end
