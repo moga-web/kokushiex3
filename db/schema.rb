@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_15_130754) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_17_122831) do
   create_table "choices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "content", null: false
@@ -41,13 +41,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_15_130754) do
   end
 
   create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "test_id", null: false
     t.integer "question_number", null: false
     t.string "content", null: false
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["test_id"], name: "index_questions_on_test_id"
+    t.bigint "test_session_id", null: false
+    t.index ["test_session_id"], name: "index_questions_on_test_session_id"
   end
 
   create_table "test_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_15_130754) do
   add_foreign_key "examinations", "tests"
   add_foreign_key "examinations", "users"
   add_foreign_key "pass_marks", "tests"
-  add_foreign_key "questions", "tests"
+  add_foreign_key "questions", "test_sessions"
   add_foreign_key "test_sessions", "tests"
   add_foreign_key "user_responses", "choices"
   add_foreign_key "user_responses", "examinations"
