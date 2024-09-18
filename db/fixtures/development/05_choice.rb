@@ -1124,7 +1124,7 @@ Choice.seed(:id, [
     { id: 936, question_id: 88, content: 'オペラグラス変形', is_correct: false, created_at: Time.current },
     { id: 937, question_id: 88, content: '尺側偏位', is_correct: false, created_at: Time.current },
     { id: 938, question_id: 88, content: 'スワンネック変形', is_correct: false, created_at: Time.current },
-    { id: 939, question_id: 88, content: ' フォーク状変形', is_correct: ftrue, created_at: Time.current },
+    { id: 939, question_id: 88, content: ' フォーク状変形', is_correct: true, created_at: Time.current },
     { id: 940, question_id: 88, content: 'ボタン穴変形', is_correct: false, created_at: Time.current },
 
     { id: 941, question_id: 89, content: '幻肢痛', is_correct: false, created_at: Time.current },
