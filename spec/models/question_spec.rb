@@ -14,6 +14,10 @@
 #
 #  index_questions_on_test_session_id  (test_session_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (test_session_id => test_sessions.id)
+#
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
