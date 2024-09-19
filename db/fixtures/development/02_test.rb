@@ -1,7 +1,12 @@
 Test.seed(:id, [
-  # TODO:テーブルの修正
-    { id: 1, year: '2023', session: 'AM', pass_mark: '50', created_at: Time.current},
-    { id: 2, year: '2023', session: 'PM', pass_mark: '100', created_at: Time.current},
-    { id: 3, year: '2022', session: 'AM', pass_mark: '60', created_at: Time.current},
-    { id: 4, year: '2022', session: 'PM', pass_mark: '110', created_at: Time.current},
-  ])
+  { id: 1, year: '2023', created_at: Time.current },
+  { id: 2, year: '2022', created_at: Time.current },
+  { id: 3, year: '2021', created_at: Time.current },
+  { id: 4, year: '2020', created_at: Time.current },
+  { id: 5, year: '2019', created_at: Time.current },
+  { id: 6, year: '2018', created_at: Time.current },
+  { id: 7, year: '2017', created_at: Time.current },
+  { id: 8, year: '2016', created_at: Time.current },
+  { id: 9, year: '2015', created_at: Time.current },
+  { id: 10, year: '2014', created_at: Time.current }
+])
