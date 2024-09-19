@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_07_113907) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_17_122831) do
   create_table "choices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "content", null: false
@@ -30,20 +30,36 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_07_113907) do
     t.index ["user_id"], name: "index_examinations_on_user_id"
   end
 
-  create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pass_marks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "test_id", null: false
+    t.integer "required_score", null: false
+    t.integer "required_practical_score", null: false
+    t.integer "total_score", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_pass_marks_on_test_id"
+  end
+
+  create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "question_number", null: false
     t.string "content", null: false
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["test_id"], name: "index_questions_on_test_id"
+    t.bigint "test_session_id", null: false
+    t.index ["test_session_id"], name: "index_questions_on_test_session_id"
+  end
+
+  create_table "test_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "test_id", null: false
+    t.string "session", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["test_id"], name: "index_test_sessions_on_test_id"
   end
 
   create_table "tests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "year", null: false
-    t.string "session", null: false
-    t.integer "pass_mark", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,7 +95,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_07_113907) do
   add_foreign_key "choices", "questions"
   add_foreign_key "examinations", "tests"
   add_foreign_key "examinations", "users"
-  add_foreign_key "questions", "tests"
+  add_foreign_key "pass_marks", "tests"
+  add_foreign_key "questions", "test_sessions"
+  add_foreign_key "test_sessions", "tests"
   add_foreign_key "user_responses", "choices"
   add_foreign_key "user_responses", "examinations"
 end

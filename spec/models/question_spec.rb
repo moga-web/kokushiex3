@@ -8,15 +8,15 @@
 #  question_number :integer          not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  test_id         :bigint           not null
+#  test_session_id :bigint           not null
 #
 # Indexes
 #
-#  index_questions_on_test_id  (test_id)
+#  index_questions_on_test_session_id  (test_session_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (test_id => tests.id)
+#  fk_rails_...  (test_session_id => test_sessions.id)
 #
 require 'rails_helper'
 

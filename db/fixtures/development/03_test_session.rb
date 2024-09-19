@@ -1,0 +1,22 @@
+TestSession.seed(:id, [
+  { id: 1, test_id: 1, session: 'AM', created_at: Time.current },
+  { id: 2, test_id: 1, session: 'PM', created_at: Time.current },
+  { id: 3, test_id: 2, session: 'AM', created_at: Time.current },
+  { id: 4, test_id: 2, session: 'PM', created_at: Time.current },
+  { id: 5, test_id: 3, session: 'AM', created_at: Time.current },
+  { id: 6, test_id: 3, session: 'PM', created_at: Time.current },
+  { id: 7, test_id: 4, session: 'AM', created_at: Time.current },
+  { id: 8, test_id: 4, session: 'PM', created_at: Time.current },
+  { id: 9, test_id: 5, session: 'AM', created_at: Time.current },
+  { id: 10, test_id: 5, session: 'PM', created_at: Time.current },
+  { id: 11, test_id: 6, session: 'AM', created_at: Time.current },
+  { id: 12, test_id: 6, session: 'PM', created_at: Time.current },
+  { id: 13, test_id: 7, session: 'AM', created_at: Time.current },
+  { id: 14, test_id: 7, session: 'PM', created_at: Time.current },
+  { id: 15, test_id: 8, session: 'AM', created_at: Time.current },
+  { id: 16, test_id: 8, session: 'PM', created_at: Time.current },
+  { id: 17, test_id: 9, session: 'AM', created_at: Time.current },
+  { id: 18, test_id: 9, session: 'PM', created_at: Time.current },
+  { id: 19, test_id: 10, session: 'AM', created_at: Time.current },
+  { id: 20, test_id: 10, session: 'PM', created_at: Time.current }
+])
