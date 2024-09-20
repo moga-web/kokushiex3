@@ -24,4 +24,5 @@ class Examination < ApplicationRecord
   belongs_to :test
 
   has_many :user_responses, dependent: :destroy
+  has_one :score, dependent: :destroy
 end
