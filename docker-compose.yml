@@ -42,6 +42,8 @@ services:
 
   sidekiq:
     build: .
+    environment:
+      REDIS_URL: "redis://redis:6379"
     command: bundle exec sidekiq
     volumes:
       - .:/app
