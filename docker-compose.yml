@@ -17,6 +17,7 @@ services:
     tty: true
     # stdin_openとは標準入出力とエラー出力をコンテナに結びつける設定
     stdin_open: true
+
   db:
     image: mysql:8.3
     # m1はplatformを指定して、linux/amd64にエミュレートする指定をすることで正常に動く
@@ -31,8 +32,30 @@ services:
       TZ: "Asia/Tokyo"
     ports:
       - "3306:3306"
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  sidekiq:
+    build: .
+    environment:
+      REDIS_URL: "redis://redis:6379"
+    command: bundle exec sidekiq
+    volumes:
+      - .:/app
+      - gem_data:/usr/local/bundle
+    depends_on:
+      - redis
+      - db
+    tty: true
+    stdin_open: true
 # PC上にdb-volumeという名前でデータ領域が作成される
 # コンテナを作り直したとしてもPC上に残るようにするために設定
 volumes:
   gem_data:
   mysql_data:
+  redis_data:
