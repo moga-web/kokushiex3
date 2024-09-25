@@ -30,7 +30,8 @@ class ScoreCalculationJob < ApplicationJob
 
   # 実地スコアの計算 (1問3点)
   def calculate_practical_score(examination, practical_questions)
-    examination.user_responses.joins(:choice).where(choices: { is_correct: true }, question: practical_questions).count * 3
+    examination.user_responses.joins(:choice).where(choices: { is_correct: true },
+                                                    question: practical_questions).count * 3
   end
 
   # 共通スコアの計算 (1問1点)

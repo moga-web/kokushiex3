@@ -43,6 +43,6 @@ class UserResponse < ApplicationRecord
   private
 
   def enqueue_score_calculation
-    ScoreCalculationJob.perform_later(self.examination_id)
+    ScoreCalculationJob.perform_later(examination_id)
   end
 end
