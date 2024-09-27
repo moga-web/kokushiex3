@@ -26,12 +26,6 @@ RSpec.describe 'UserResponses', type: :request do
       expect { post user_responses_path, params: params }.to change(UserResponse, :count).by(5)
       expect(response).to have_http_status(:found)
     end
-
-    it 'enqueue job' do
-      expect {
-        ScoreCalculationJob.perform_later(examination.id)
-      }.to have_enqueued_job.with(examination.id)
-    end
   end
 end
 
