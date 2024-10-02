@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     get '/select' => 'selections#index'
   end
   get '/tests/:id' => 'tests#show', as: 'test'
+
+  resources :examinations do
+    resources :scores, only: [:create, :show]
+  end
   
   resources :user_responses, only: [:create]
 # 必要かわからないが一応追加
