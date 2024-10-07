@@ -9,7 +9,7 @@
 #
 class Test < ApplicationRecord
   has_many :test_sessions, dependent: :destroy
-  has_many :pass_marks, dependent: :destroy
+  has_one :pass_mark, dependent: :destroy
   has_many :examinations, through: :test_sessions, dependent: :destroy
 
   validates :year, presence: true
