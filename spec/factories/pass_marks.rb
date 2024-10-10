@@ -20,6 +20,8 @@
 #
 FactoryBot.define do
   factory :pass_mark do
-    
+    required_practical_score { rand(0..50) }
+    required_score { rand(150..180) }
+    total_score { 1 }
   end
 end
