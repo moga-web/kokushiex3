@@ -24,4 +24,11 @@ class Question < ApplicationRecord
 
   validates :content, presence: true
   validates :question_number, presence: true
+
+  def self.sort_questions(test_session)
+    {
+      practical_questions: test_session.questions.order(:question_number).limit(20),
+      common_questions: test_session.questions.order(question_number: :desc).limit(20)
+    }
+  end
 end
