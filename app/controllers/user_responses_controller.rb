@@ -6,9 +6,7 @@ class UserResponsesController < ApplicationController
     if UserResponse.bulk_create_responses(@examination.id, params[:user_response][:choice_ids])
 
       score = @examination.build_score
-      if score.calculate_scores(@examination)
-        redirect_to dashboard_path, notice: '試験結果を保存しました'
-      end
+      redirect_to dashboard_path, notice: '試験結果を保存しました' if score.calculate_scores(@examination)
     else
       @user_responses = params[:user_response][:choice_ids]
       render :new, alert: '試験結果を保存できませんでした'
