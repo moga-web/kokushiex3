@@ -45,7 +45,7 @@ RSpec.describe UserResponse, type: :model do
     end
 
     context 'when one of the responses is invalid' do
-      let(:invalid_choice_id) { nil } # 無効な選択肢ID
+      let(:invalid_choice_id) { 100 } # 無効な選択肢ID
 
       it 'does not create any user_response when one response is invalid' do
         choice_ids_with_invalid = choice_ids + [invalid_choice_id]
@@ -57,8 +57,9 @@ RSpec.describe UserResponse, type: :model do
 
       it 'logs an error message for the invalid response' do
         choice_ids_with_invalid = choice_ids + [invalid_choice_id]
+        missing_ids = [invalid_choice_id]
 
-        expect(Rails.logger).to receive(:error).with(/Failed to save UserResponse:/).once
+        expect(Rails.logger).to receive(:error).with("Missing Choice IDs: #{missing_ids.join(', ')}").once
         UserResponse.bulk_create_responses(examination.id, choice_ids_with_invalid)
       end
     end
