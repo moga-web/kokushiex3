@@ -44,10 +44,4 @@ class UserResponse < ApplicationRecord
     # insert_allを使って一括挿入
     UserResponse.insert_all(attributes) # rubocop:disable Rails/SkipsModelValidations
   end
-
-  private
-
-  def enqueue_score_calculation
-    ScoreCalculationJob.perform_later(examination_id)
-  end
 end
