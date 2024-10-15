@@ -4,7 +4,7 @@
         <div class='flex mb-10'>
             <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
                 <div class='m-5'>
-                    <h2 class='font-bold text-xl'>前回のレポート</h2>
+                    <h2 class='font-bold text-xl'>前回のスコア</h2>
                     <div class='text-center my-2 text-4xl text-sky-500'>
                         <%= @latest_examination.test.decorate.implementation_year %>
                     </div>
@@ -26,6 +26,10 @@
                             <div class='text-3xl text-sky-500'><%= @latest_examination.test.pass_mark.total_score %></div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mr-5 hover:text-orange-300">
+                    <%= link_to 'レポートを確認する', examination_path(@latest_examination) %>
                 </div>
             </div>
         </div>

@@ -1,0 +1,77 @@
+<div class='flex flex-wrap body-font'>
+    <div class='w-full max-w-4xl m-auto'>
+        <!-- レポートセクション -->
+        <div class='flex mb-10'>
+            <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
+                <div class='m-5'>
+                    <div class='flex items-center'>
+                        <h2 class='font-bold text-xl'>レポート</h2>
+                        <h3 class='text-base'>(受験日：<%= @examination.attempt_date.strftime('%Y年%m月%d日') %>)</h3>
+                    </div>
+                    <div class='flex justify-center items-baseline'>
+                        <div class='my-2 text-4xl text-sky-500'>
+                            <%= @examination.test.decorate.implementation_year %>
+                        </div>
+                        <p class='text-base ml-2'><%= @examination.test.pass_mark.total_score %>点満点</p>
+                    </div>
+
+                    <!-- テーブル表示 -->
+                    <table class="table-auto w-full text-center border-collapse">
+                        <thead>
+                        <tr>
+                            <th class="border border-b-4 border-gray-300 px-4 py-2"></th>
+                            <th class="border border-b-4 border-gray-300 px-4 py-2 text-3xl text-gray-500">共通</th>
+                            <th class="border border-b-4 border-gray-300 px-4 py-2 text-3xl text-gray-500">実地</th>
+                            <th class="border border-b-4 border-gray-300 px-4 py-2 text-3xl text-gray-500">総得点</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- ユーザーの得点 -->
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-gray-500">
+                                <%= @examination.user.username %>の得点
+                            </td>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-sky-500"><%= @score.common_score %></td>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-sky-500">
+                                <%= @score.practical_score %>
+                            </td>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-sky-500"><%= @score.total_score %></td>
+                        </tr>
+
+                        <!-- 合格基準 -->
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-gray-500">合格基準</td>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-green-500"><%# 共通の合格点は設定されていない %></td>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-green-500">
+                                <%= @examination.test.pass_mark.required_practical_score %>
+                            </td>
+                            <td class="border border-gray-300 px-4 py-2 text-3xl text-green-500">
+                                <%= @examination.test.pass_mark.required_score %>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 回答確認セクション -->
+        <div class='flex'>
+            <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
+                <div class='m-5'>
+                    <h2 class='font-bold text-xl'>学習進捗</h2>
+                    <div class='flex flex-wrap justify-around gap-20 mt-4'>
+                        <div class='flex flex-col items-center'>
+                            <h3 class='text-3xl text-gray-500'>受験済みのテスト</h3>
+                            <%= image_tag 'circle.png', size: 150 %>
+                        </div>
+                        <div class='flex flex-col items-center'>
+                            <h3 class='text-3xl text-gray-500'>合格点超えのテスト</h3>
+                            <%= image_tag 'circle.png', size: 150 %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
