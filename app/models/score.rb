@@ -27,7 +27,7 @@ class Score < ApplicationRecord
 
   def calculate_scores(examination)
     scores = { total_score: 0, common_score: 0, practical_score: 0 }
-    correct_responses = preload_responses(examination)
+    correct_responses = examination.user_responses.correct_responses.to_a
     # 配点ごとにスコアを計算
     scores[:practical_score] += calculate_practical_score(correct_responses)
     scores[:common_score] += calculate_common_score(correct_responses)
@@ -38,10 +38,6 @@ class Score < ApplicationRecord
       common_score: scores[:common_score],
       practical_score: scores[:practical_score]
     )
-  end
-
-  def preload_responses(examination)
-    examination.user_responses.includes(choice: :question).where(choices: { is_correct: true }).to_a
   end
 
   # 実地スコアの計算 (1問3点)

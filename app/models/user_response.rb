@@ -22,6 +22,8 @@ class UserResponse < ApplicationRecord
   belongs_to :examination
   belongs_to :choice
 
+  scope :correct_responses, -> { joins(choice: :question).where(choices: { is_correct: true }) }
+
   # insert_allではバリデーションチェックができないためメソッド化
   def self.bulk_create_responses(examination_id, choice_ids) # rubocop:disable Metrics/MethodLength
     # 事前に全ての Choiceを一括で取得
