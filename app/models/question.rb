@@ -24,4 +24,16 @@ class Question < ApplicationRecord
 
   validates :content, presence: true
   validates :question_number, presence: true
+
+  def correct_choices
+    choices.where(is_correct: true)
+  end
+
+  # questionに対応する回答を取得する
+  def selected_choice(examination)
+    user_response = examination.user_responses.find { |response| response.choice.question_id == id }
+    # 回答があれば配列で返し、未回答の場合は空の配列を返す
+    user_response ? [user_response.choice_id] : []
+    # 本来はchoise_idではなく選択肢の番号1〜5を返したいがこれに該当するカラムがない
+  end
 end
