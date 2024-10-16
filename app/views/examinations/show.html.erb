@@ -76,10 +76,10 @@
                                 <% 50.times do |i| %> <!-- 50行固定 -->
                                 <tr>
                                     <% 4.times do |col| %> <!-- 4列（3セット×4=12列）に折り返す -->
-                                    <% @questions[i + (col * 50)] %>
+                                    <% question = @questions[i + (col * 50)] %>
                                     <!-- 問題番号 -->
                                     <td class="border border-gray-300 px-2 py-1" style="width: 80px;">
-                                        <%= @test.decorate.question_code(question) %>
+                                        <%= @test.decorate.question_code_without_turn(question) %>
                                     </td>
                                     <!-- 回答 -->
                                     <td class="border border-gray-300 px-2 py-1 bg-sky-100" style="width: 80px;">
