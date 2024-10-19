@@ -62,39 +62,15 @@
                     <h2 class='font-bold text-xl'>正誤表</h2>
                     <div class='flex flex-wrap justify-around gap-20 mt-4'>
                         <!-- テーブル表示 -->
-                        <table class="table-auto w-full text-center border-collapse">
-                            <thead>
-                                <tr>
-                                <% 4.times do %> <!-- 1セット (問題番号、回答、正答) を4回表示 -->
-                                    <th class="border-b-2 border-gray-300 px-2 py-1 w-20 whitespace-nowrap">問題番号</th>
-                                    <th class="border-b-2 border-gray-300 px-2 py-1 w-20 whitespace-nowrap">回答</th>
-                                    <th class="border-b-2 border-gray-300 px-2 py-1 w-20 whitespace-nowrap">正答</th>
-                                <% end %>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% 50.times do |row| %> <!-- 50行固定 -->
-                                <tr>
-                                    <% 4.times do |col| %> <!-- 4列（3セット×4=12列）に折り返す -->
-                                    <% @questions[row + (col * 50)] %>
-                                    <!-- 問題番号 -->
-                                    <td class="border border-gray-300 px-2 py-1 w-20
-                                               <%= question.decorate.incorrect_color(@examination) %>">
-                                        <%= @test.decorate.question_code_without_turn(question) %>
-                                    </td>
-                                    <!-- 回答 -->
-                                    <td class="border border-gray-300 px-2 py-1 bg-sky-100 w-20">
-                                        <%= question.selected_choice(@examination).join(', ') %>
-                                    </td>
-                                    <!-- 正答 -->
-                                    <td class="border border-gray-300 px-2 py-1 bg-green-100 w-20">
-                                        <%= question.correct_choices.pluck(:id).join(', ') %>
-                                    </td>
-                                    <% end %>
-                                </tr>
-                                <% end %>
-                            </tbody>
-                        </table>
+                        <div class="grid grid-cols-4 gap-2">
+                            <% 4.times do |col| %>
+                                <%= render partial: 'question_table',
+                                           locals: {
+                                             questions: @questions.slice(col * 50,
+                                                                         50), examination: @examination, test: @test
+                                           } %>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
             </div>
