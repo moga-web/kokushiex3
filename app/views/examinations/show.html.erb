@@ -66,8 +66,8 @@
                             <% 4.times do |col| %>
                                 <%= render partial: 'question_table',
                                            locals: {
-                                             questions: @questions.slice(col * 50,
-                                                                         50), examination: @examination, test: @test
+                                             questions: @questions.slice(col * 50, 50) || [],
+                                             examination: @examination, test: @test
                                            } %>
                             <% end %>
                         </div>
