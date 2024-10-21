@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe TestDecorator do
-  describe '#turn' do
+RSpec.describe QuestionDecorator do
+  describe '#incorrect_color(examination)' do
     let(:test){ create(:test, year:2023) }
 
     it '回次を返す' do
