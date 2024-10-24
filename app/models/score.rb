@@ -25,28 +25,36 @@ class Score < ApplicationRecord
   validates :common_score, presence: true
   validates :practical_score, presence: true
 
-  def calculate_scores(examination)
-    scores = { total_score: 0, common_score: 0, practical_score: 0 }
-    correct_responses = examination.user_responses.correct_responses.to_a
-    # 配点ごとにスコアを計算
-    scores[:practical_score] += calculate_practical_score(correct_responses)
-    scores[:common_score] += calculate_common_score(correct_responses)
-    scores[:total_score] = scores[:practical_score] + scores[:common_score]
+  class ScoreCalculator
+    def initialize(examination)
+      @examination = examination
+    end
 
-    update!(
-      total_score: scores[:total_score],
-      common_score: scores[:common_score],
-      practical_score: scores[:practical_score]
-    )
-  end
+    def call
+      Score.create!(
+        examination_id: @examination.id,
+        total_score: total_score,
+        common_score: common_score,
+        practical_score: practical_score
+      )
+    end
 
-  # 実地スコアの計算 (1問3点)
-  def calculate_practical_score(correct_responses)
-    correct_responses.count { |response| response.choice.question.question_number <= 20 } * 3
-  end
+    def total_score
+      common_score + practical_score
+    end
 
-  # 共通スコアの計算 (1問1点)
-  def calculate_common_score(correct_responses)
-    correct_responses.count { |response| response.choice.question.question_number > 20 } * 1
+    # 実地スコアの計算 (1問3点)
+    def practical_score
+      @practical_score ||= @correct_responses.count { |response| response.choice.question.question_number <= 20 } * 3
+    end
+
+    # 共通スコアの計算 (1問1点)
+    def common_score
+      @common_score ||= @correct_responses.count { |response| response.choice.question.question_number > 20 } * 1
+    end
+
+    def correct_responses
+      @correct_responses ||= @examination.user_responses.correct_responses.to_a
+    end
   end
 end
