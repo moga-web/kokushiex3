@@ -23,7 +23,7 @@
                         </div>
                         <div class='flex flex-col text-center'>
                             <h3 class='text-3xl text-gray-500 mx-8'>合格点</h3>
-                            <div class='text-3xl text-sky-500'><%= @latest_examination.test.pass_mark.total_score %></div>
+                            <div class='text-3xl text-sky-500'><%= @latest_examination.test.pass_mark.total_score || '-' %></div>
                         </div>
                     </div>
                 </div>
