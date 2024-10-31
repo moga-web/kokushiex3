@@ -30,23 +30,8 @@ class Examination < ApplicationRecord
 
   def self.create_result!(user_id:, test_id:, attempt_date:, choice_ids:)
     examination = Examination.create!(user_id:, test_id:, attempt_date:)
-
-    choices = Choice.where(id: choice_ids)
-    if choices.size != choice_ids.size
-      missing_ids = choice_ids - choices.pluck(:id)
-      Rails.logger.error "Missing Choice IDs: #{missing_ids.join(', ')}"
-      raise InvalidChoiceError, '不正な選択肢が含まれています'
-    end
-
-    attributes = choice_ids.map do |choice_id|
-      {
-        examination_id: examination.id,
-        choice_id:,
-      } # rails7系からはcreated_at, updated_atは自動で設定される
-    end
-    # insert_all!を使って一括挿入
-    UserResponse.insert_all!(attributes)
-
+    # 回答の保存
+    UserResponse.bulk_create_responses(examination, choice_ids)
     # スコア計算
     Score::ScoreCalculator.new(examination).call
   end

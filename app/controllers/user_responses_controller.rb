@@ -5,7 +5,7 @@ class UserResponsesController < ApplicationController
                                  test_id: params[:test_id],
                                  attempt_date: DateTime.current,
                                  choice_ids: params[:user_response][:choice_ids]
-                                 )
+                                )
       # リダイレクト
       redirect_to dashboard_path, notice: '試験結果を保存しました'
     rescue StandardError => e

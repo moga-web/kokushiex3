@@ -25,7 +25,7 @@ class UserResponse < ApplicationRecord
   scope :correct_responses, -> { joins(choice: :question).where(choices: { is_correct: true }) }
 
   # insert_allではバリデーションチェックができないためメソッド化
-  def self.bulk_create_responses(examination_id, choice_ids) # rubocop:disable Metrics/MethodLength
+  def self.bulk_create_responses(examination, choice_ids) # rubocop:disable Metrics/MethodLength
     # 事前に全ての Choiceを一括で取得
     choices = Choice.where(id: choice_ids)
     # 不正なchoice_idが含まれている場合はエラーを返す
@@ -37,10 +37,8 @@ class UserResponse < ApplicationRecord
     # 一括挿入用のハッシュを作成
     attributes = choice_ids.map do |choice_id|
       {
-        examination_id:,
-        choice_id:,
-        created_at: Time.current,
-        updated_at: Time.current
+        examination_id: examination.id,
+        choice_id:
       }
     end
     # insert_allを使って一括挿入

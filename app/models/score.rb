@@ -33,9 +33,9 @@ class Score < ApplicationRecord
     def call
       Score.create!(
         examination_id: @examination.id,
-        common_score: common_score,
-        practical_score: practical_score,
-        total_score: total_score
+        common_score:,
+        practical_score:,
+        total_score:
       )
     end
 
