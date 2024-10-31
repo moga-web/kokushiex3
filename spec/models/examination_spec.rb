@@ -22,5 +22,27 @@
 require 'rails_helper'
 
 RSpec.describe Examination, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.create_result!' do
+    let(:user) { create(:user) }
+    let(:test) { create(:test) }
+    let(:choice_ids) { create_list(:choice, 3).map(&:id) }
+    let(:score_calculator_mock) { instance_double("Score::ScoreCalculator") }
+    let(:params) do
+      { user_id: user.id, test_id: test.id, attempt_date: DateTime.current, choice_ids: choice_ids }
+    end
+
+    before do
+      # UserResponse.bulk_create_responsesとScore::ScoreCalculator#callをモック
+      allow(UserResponse).to receive(:bulk_create_responses)
+      allow(Score::ScoreCalculator).to receive(:new).and_return(score_calculator_mock)
+      allow(score_calculator_mock).to receive(:call)
+    end
+
+    it 'Examinationが作成され、UserResponseとScoreの処理が呼び出される' do
+      # 参考：https://zenn.dev/igaiga/books/rails-practice-note/viewer/ruby_argument_literals#:~:text=%E5%BC%95%E6%95%B0%E3%82%92%E6%B8%A1%E3%81%99%E3%81%A8%E3%81%8D%E3%81%AB%E3%80%81%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%89%8D%E3%81%AB%20**%20%E3%82%92%E3%81%A4%E3%81%91%E3%81%A6%E6%B8%A1%E3%81%99%E3%81%A8%E3%80%81%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%90%84%E8%A6%81%E7%B4%A0%E3%82%92%E3%82%AD%E3%83%BC%E3%83%AF%E3%83%BC%E3%83%89%E5%BC%95%E6%95%B0%E3%81%A8%E3%81%97%E3%81%A6%E6%B8%A1%E3%81%99%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99
+      expect { Examination.create_result!(**params) }.to change(Examination, :count).by(1)
+      expect(UserResponse).to have_received(:bulk_create_responses).with(instance_of(Examination), choice_ids)
+      expect(score_calculator_mock).to have_received(:call)
+    end
+  end 
 end

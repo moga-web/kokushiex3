@@ -19,7 +19,6 @@ RSpec.describe 'UserResponses', type: :request do
 
     before do
       sign_in user
-      ActiveJob::Base.queue_adapter = :test
     end
 
     it 'user_responseが作成されリダイレクトされる' do
