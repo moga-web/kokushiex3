@@ -2,12 +2,13 @@
 #
 # Table name: choices
 #
-#  id          :bigint           not null, primary key
-#  content     :string(255)      not null
-#  is_correct  :boolean          default(FALSE), not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  question_id :bigint           not null
+#  id            :bigint           not null, primary key
+#  content       :string(255)      not null
+#  is_correct    :boolean          default(FALSE), not null
+#  option_number :integer          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  question_id   :bigint           not null
 #
 # Indexes
 #
@@ -20,4 +21,6 @@
 class Choice < ApplicationRecord
   belongs_to :question
   has_many :user_responses, dependent: :destroy
+
+  validates :option_number, presence: true, inclusion: { in: 1..5 }
 end
