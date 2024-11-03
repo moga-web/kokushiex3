@@ -22,5 +22,5 @@ class Choice < ApplicationRecord
   belongs_to :question
   has_many :user_responses, dependent: :destroy
 
-  validates :option_number, presence: true, inclusion: { in: 1..5 }
+  validates :option_number, presence: true, numericality: { in: 1..5 }
 end
