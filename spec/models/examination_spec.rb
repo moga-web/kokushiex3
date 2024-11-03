@@ -33,7 +33,7 @@ RSpec.describe Examination, type: :model do
 
     before do
       # UserResponse.bulk_create_responsesとScore::ScoreCalculator#callをモック
-      allow(UserResponse).to receive(:bulk_create_responses)
+      allow(UserResponse).to receive(:bulk_create_responses).and_return(true)
       allow(Score::ScoreCalculator).to receive(:new).and_return(score_calculator_mock)
       allow(score_calculator_mock).to receive(:call)
     end

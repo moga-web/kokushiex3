@@ -34,7 +34,7 @@ class Examination < ApplicationRecord
     unless UserResponse.bulk_create_responses(examination, choice_ids)
       raise InvalidChoiceError, 'Invalid choice IDs provided'
     end
-    
+
     # スコア計算
     Score::ScoreCalculator.new(examination).call
   end
