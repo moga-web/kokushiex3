@@ -22,27 +22,26 @@ class UserResponse < ApplicationRecord
   belongs_to :examination
   belongs_to :choice
 
+  scope :correct_responses, -> { joins(choice: :question).where(choices: { is_correct: true }) }
+
   # insert_allではバリデーションチェックができないためメソッド化
-  def self.bulk_create_responses(examination_id, choice_ids)
-    # バリデーションチェックのためダミーレコードを生成
+  def self.bulk_create_responses(examination, choice_ids) # rubocop:disable Metrics/MethodLength
+    # 事前に全ての Choiceを一括で取得
+    choices = Choice.where(id: choice_ids)
+    # 不正なchoice_idが含まれている場合はエラーを返す
+    if choices.size != choice_ids.size
+      missing_ids = choice_ids - choices.pluck(:id)
+      Rails.logger.error "Missing Choice IDs: #{missing_ids.join(', ')}"
+      return false
+    end
+    # 一括挿入用のハッシュを作成
     attributes = choice_ids.map do |choice_id|
-      user_response = new(examination_id:, choice_id:)
-      if user_response.valid?
-        # 一括挿入用のハッシュを作成
-        { examination_id:, choice_id:, created_at: Time.current, updated_at: Time.current }
-      else
-        # 現状では1つでもエラーが発生すると1つもcreateされない
-        Rails.logger.error "Failed to save UserResponse: #{user_response.errors.full_messages.join(', ')}"
-        return false
-      end
+      {
+        examination_id: examination.id,
+        choice_id:
+      }
     end
     # insert_allを使って一括挿入
     UserResponse.insert_all(attributes) # rubocop:disable Rails/SkipsModelValidations
-  end
-
-  private
-
-  def enqueue_score_calculation
-    ScoreCalculationJob.perform_later(examination_id)
   end
 end

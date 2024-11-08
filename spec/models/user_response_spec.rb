@@ -25,40 +25,40 @@ RSpec.describe UserResponse, type: :model do
     let(:examination) { create(:examination) }
     let(:choice_ids) { create_list(:choice, 3).map(&:id) }
 
-    context 'when all responses are valid' do
-      it 'creates all user_responses successfully' do
+    context '不正なchoice_idが含まれない場合' do
+      it 'user_responsesが作成される' do
         expect {
-          UserResponse.bulk_create_responses(examination.id, choice_ids)
+          UserResponse.bulk_create_responses(examination, choice_ids)
         }.to change(UserResponse, :count).by(3)
       end
 
-      it 'creates user_responses with correct attributes' do
-        UserResponse.bulk_create_responses(examination.id, choice_ids)
+      it 'choice_id毎にuser_responseが作成される' do
+        UserResponse.bulk_create_responses(examination, choice_ids)
 
         choice_ids.each do |choice_id|
           user_response = UserResponse.find_by(choice_id: choice_id)
-          expect(user_response).not_to be_nil
           expect(user_response.examination_id).to eq(examination.id)
           expect(user_response.choice_id).to eq(choice_id)
         end
       end
     end
 
-    context 'when one of the responses is invalid' do
-      let(:invalid_choice_id) { nil } # 無効な選択肢ID
+    context '無効なchoice_idが含まれる場合' do
+      let(:invalid_choice_id) { 100 }
 
-      it 'does not create any user_response when one response is invalid' do
+      it 'user_responseは1件も作成されない' do
         choice_ids_with_invalid = choice_ids + [invalid_choice_id]
 
         expect {
-          UserResponse.bulk_create_responses(examination.id, choice_ids_with_invalid)
-        }.not_to change(UserResponse, :count) # 何も作成されないことを確認
+          UserResponse.bulk_create_responses(examination, choice_ids_with_invalid)
+        }.not_to change(UserResponse, :count)
       end
 
-      it 'logs an error message for the invalid response' do
+      it 'logにerror messageが含まれる' do
         choice_ids_with_invalid = choice_ids + [invalid_choice_id]
+        missing_ids = [invalid_choice_id]
 
-        expect(Rails.logger).to receive(:error).with(/Failed to save UserResponse:/).once
+        expect(Rails.logger).to receive(:error).with("Missing Choice IDs: #{missing_ids.join(', ')}").once
         UserResponse.bulk_create_responses(examination.id, choice_ids_with_invalid)
       end
     end
