@@ -26,7 +26,7 @@ class Question < ApplicationRecord
   validates :question_number, presence: true
 
   def correct_choices
-    choices.where(is_correct: true)
+    choices.where(is_correct: true).pluck(:option_number)
   end
 
   # questionに対応する回答を取得する

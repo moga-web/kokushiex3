@@ -21,7 +21,7 @@
 
         <!-- 正答 -->
         <td class="border border-gray-300 px-2 py-1 bg-green-100 w-20">
-          <%= question.correct_choices.pluck(:id).join(', ') %>
+          <%= question.correct_choices.join(', ') %>
         </td>
       </tr>
     <% end %>
