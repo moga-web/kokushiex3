@@ -24,11 +24,11 @@ RSpec.describe Question, type: :model do
   let(:question) { create(:question) }
 
   describe '#correct_choices' do
-    let(:correct_choice){ create(:choice, question: , is_correct: true) }
-    let(:incorrect_choice){ create(:choice, question: , is_correct: false) }
+    let!(:correct_choice){ create(:choice, question: , is_correct: true) }
+    let!(:incorrect_choice){ create(:choice, question: , is_correct: false) }
 
     it '正解の選択肢のみ配列で返される' do
-      expect(question.correct_choices).to eq([correct_choice])
+      expect(question.correct_choices).to eq([correct_choice.option_number])
     end
   end
 
@@ -41,8 +41,8 @@ RSpec.describe Question, type: :model do
       let!(:user_response1) { create(:user_response, examination: , choice: first_choice) }
       let!(:user_response2) { create(:user_response, examination: , choice: second_choice) }
 
-      it '回答（choice_id）が配列で返される' do
-        expect(question.selected_choice(examination)).to eq([first_choice.id, second_choice.id])
+      it '回答（option_number）が配列で返される' do
+        expect(question.selected_choice(examination)).to eq([first_choice.option_number, second_choice.option_number])
       end
     end
   
