@@ -33,7 +33,6 @@ class Question < ApplicationRecord
   def selected_choice(examination)
     user_responses = examination.user_responses.select { |response| response.choice.question_id == id }
     # 回答があれば配列で返し、未回答の場合は空の配列を返す
-    user_responses.map(&:choice_id)
-    # 本来はchoise_idではなく選択肢の番号1〜5を返したいがこれに該当するカラムがない
+    user_responses.map { |response| response.choice.option_number } # choiceのoption_numberを返す
   end
 end
