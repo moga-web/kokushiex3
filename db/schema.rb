@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_20_125805) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_03_062331) do
   create_table "choices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "content", null: false
     t.boolean "is_correct", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "option_number", null: false
     t.index ["question_id"], name: "index_choices_on_question_id"
   end
 
