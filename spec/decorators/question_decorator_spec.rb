@@ -2,10 +2,28 @@ require 'rails_helper'
 
 RSpec.describe QuestionDecorator do
   describe '#incorrect_color(examination)' do
-    let(:test){ create(:test, year:2023) }
+    let(:examination) { create(:examination) }
+    let(:question) { create(:question).decorate }
 
-    it '回次を返す' do
-      expect(test.decorate.turn).to eq 58
+    context '未回答の場合' do
+      it '赤色を返す' do
+        allow(question).to receive(:selected_option_numbers).with(examination).and_return([])
+        expect(question.incorrect_color(examination)).to eq 'text-red-300'
+      end
+    end
+
+    context '回答がある場合' do
+      it '回答が正解の場合は空文字を返す' do
+        allow(question).to receive(:selected_option_numbers).with(examination).and_return([1, 2])
+        allow(question).to receive(:correct_option_numbers).and_return([1, 2])
+        expect(question.incorrect_color(examination)).to eq ''
+      end
+
+      it '回答が不正解の場合は赤色を返す' do
+        allow(question).to receive(:selected_option_numbers).with(examination).and_return([1, 3])
+        allow(question).to receive(:correct_option_numbers).and_return([1, 2])
+        expect(question.incorrect_color(examination)).to eq 'text-red-300'
+      end
     end
   end
 
