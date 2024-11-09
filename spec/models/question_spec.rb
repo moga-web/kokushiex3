@@ -23,16 +23,16 @@ require 'rails_helper'
 RSpec.describe Question, type: :model do
   let(:question) { create(:question) }
 
-  describe '#correct_choices' do
+  describe '#correct_option_numbers' do
     let!(:correct_choice){ create(:choice, question: , is_correct: true) }
     let!(:incorrect_choice){ create(:choice, question: , is_correct: false) }
 
     it '正解の選択肢のみ配列で返される' do
-      expect(question.correct_choices).to eq([correct_choice.option_number])
+      expect(question.correct_option_numbers).to eq([correct_choice.option_number])
     end
   end
 
-  describe '#selected_choice' do
+  describe '#selected_option_numbers' do
     let(:examination) { create(:examination) }
 
     context 'questionに紐づくユーザーの回答がある場合' do
@@ -42,7 +42,7 @@ RSpec.describe Question, type: :model do
       let!(:user_response2) { create(:user_response, examination: , choice: second_choice) }
 
       it '回答（option_number）が配列で返される' do
-        expect(question.selected_choice(examination)).to eq([first_choice.option_number, second_choice.option_number])
+        expect(question.selected_option_numbers(examination)).to eq([first_choice.option_number, second_choice.option_number])
       end
     end
   
@@ -52,7 +52,7 @@ RSpec.describe Question, type: :model do
       let(:other_response){ create(:user_response, examination:, choice: other_choice) }
 
       it '空の配列が返される' do
-        expect(other_question.selected_choice(examination)).to eq([])
+        expect(other_question.selected_option_numbers(examination)).to eq([])
       end
     end
   end
