@@ -16,12 +16,12 @@
 
         <!-- 回答 -->
         <td class="border border-gray-300 px-2 py-1 bg-sky-100 w-20">
-          <%= question.selected_choice(examination).join(', ') %>
+          <%= question.selected_option_numbers(examination).join(', ') %>
         </td>
 
         <!-- 正答 -->
         <td class="border border-gray-300 px-2 py-1 bg-green-100 w-20">
-          <%= question.correct_choices.join(', ') %>
+          <%= question.correct_option_numbers.join(', ') %>
         </td>
       </tr>
     <% end %>
