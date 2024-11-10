@@ -24,4 +24,15 @@ class Question < ApplicationRecord
 
   validates :content, presence: true
   validates :question_number, presence: true
+
+  def correct_option_numbers
+    choices.where(is_correct: true).pluck(:option_number)
+  end
+
+  # questionに対応する回答を取得する
+  def selected_option_numbers(examination)
+    user_responses = examination.user_responses.select { |response| response.choice.question_id == id }
+    # 回答があれば配列で返し、未回答の場合は空の配列を返す
+    user_responses.map { |response| response.choice.option_number } # choiceのoption_numberを返す
+  end
 end
