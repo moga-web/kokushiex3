@@ -12,6 +12,9 @@
 
   <body class="flex flex-col max-h-fit">
     <%= render 'layouts/header' %>
+    <div class="flash">
+      <%= render 'layouts/flash' %>
+    </div>
     <div class="flex-grow mb-10">
       <%= yield %>
     </div>
