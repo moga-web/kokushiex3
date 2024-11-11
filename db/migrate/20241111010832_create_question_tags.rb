@@ -7,6 +7,6 @@ class CreateQuestionTags < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :question_tags, [:question_id, :tag_id], unique: true  # ユニークインデックスを追加
+    add_index :question_tags, [:question_id, :tag_id], unique: true
   end
 end

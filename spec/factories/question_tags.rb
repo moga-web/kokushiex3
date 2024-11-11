@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :question_tag do
-    question { nil }
-    tag { nil }
+    question { association(:question) }
+    tag { association(:tag) }
   end
 end
