@@ -1,5 +1,5 @@
 class Tests::SelectionsController < ApplicationController
   def index
-    @test = Test.all
+    @tests = Test.all
   end
 end
