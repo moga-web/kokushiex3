@@ -1,4 +1,4 @@
-Tags.seed(:id, [
+Tag.seed(:id, [
   { id: 1, name: '共通問題' },
   { id: 2, name: '専門問題' },
   { id: 3, name: '実地問題' },
