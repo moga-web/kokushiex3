@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_03_062331) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_11_010832) do
   create_table "choices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "content", null: false
@@ -41,6 +41,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_03_062331) do
     t.index ["test_id"], name: "index_pass_marks_on_test_id"
   end
 
+  create_table "question_tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id", "tag_id"], name: "index_question_tags_on_question_id_and_tag_id", unique: true
+    t.index ["question_id"], name: "index_question_tags_on_question_id"
+    t.index ["tag_id"], name: "index_question_tags_on_tag_id"
+  end
+
   create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "question_number", null: false
     t.string "content", null: false
@@ -59,6 +69,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_03_062331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["examination_id"], name: "index_scores_on_examination_id"
+  end
+
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "test_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -107,6 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_03_062331) do
   add_foreign_key "examinations", "tests"
   add_foreign_key "examinations", "users"
   add_foreign_key "pass_marks", "tests"
+  add_foreign_key "question_tags", "questions"
+  add_foreign_key "question_tags", "tags"
   add_foreign_key "questions", "test_sessions"
   add_foreign_key "scores", "examinations"
   add_foreign_key "test_sessions", "tests"
