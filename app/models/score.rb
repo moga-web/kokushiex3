@@ -31,6 +31,8 @@ class Score < ApplicationRecord
     end
 
     def call
+      correct_responses
+
       Score.create!(
         examination_id: @examination.id,
         common_score:,
