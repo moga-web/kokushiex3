@@ -10,7 +10,7 @@
     <% questions.each do |question| %>
       <tr>
         <!-- 問題番号 -->
-        <td class="border border-gray-300 px-2 py-1 w-20 <%= question.decorate.incorrect_color(examination) %>">
+        <td class="border border-gray-300 px-2 py-1 w-20 <%= question.decorate.result_color(examination) %>">
           <%= test.decorate.question_code_without_turn(question) %>
         </td>
 
