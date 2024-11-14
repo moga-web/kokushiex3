@@ -12,7 +12,7 @@
               <div><%= @test.decorate.question_code(question) %></div>
               <div class='flex'>
                 <% question.tags.each do |tag| %>
-                  <span class='rounded-full p-2 <%= tag.decorate.category_color %>'><%= tag.name %></span>
+                  <span class='rounded-full p-2 mx-1 <%= tag.decorate.category_color %>'><%= tag.name %></span>
                 <% end %>
               </div>
             </div>
@@ -40,7 +40,9 @@
                                         id: "select-#{question.id}-#{index + 1}",
                                         class: 'w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500' %>
                       <label for='select-<%= question.id %>-<%= index + 1 %>'>
-                        <span class="w-full py-3 ms-2 text-base font-medium text-gray-900"><%= choice.option_number %>. <%= choice.content %></span>
+                        <span class="w-full py-3 ms-2 text-base font-medium text-gray-900">
+                          <%= choice.option_number %>. <%= choice.content %>
+                        </span>
                       </label>
                     </div>
                   </li>

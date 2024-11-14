@@ -14,5 +14,17 @@
 FactoryBot.define do
   factory :tag do
     name { Faker::Lorem.word }
+
+    trait :major_category do
+      id { 1 }
+    end
+
+    trait :common_tags do
+      id { 4 }
+    end
+
+    trait :special_tags do
+      id { 14 }
+    end
   end
 end
