@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
   get '/tests/:id' => 'tests#show', as: 'test'
 
+  resources :mini_tests, only: [:index]
+
   resources :examinations do
     resources :scores, only: [:show]
   end
