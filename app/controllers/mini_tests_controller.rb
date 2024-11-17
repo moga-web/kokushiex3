@@ -1,6 +1,9 @@
 class MiniTestsController < ApplicationController
   def index
-    @q = Test.joins(test_sessions: { questions: :tags }).ransack(params[:q])
-    @tests = @q.result.includes(test_sessions: { questions: :tags }).decorate
+    tag_ids = params[:q][:tag_ids]
+    @questions = Question.joins(:tags).where(tags: { id: tag_ids }).decorate
+
+    # 解答を保持するためにuser_responseを持たせたいが、初回にエラーが出ないように空配列を渡す
+    @user_responses = []
   end
 end
