@@ -13,4 +13,12 @@ class Test < ApplicationRecord
   has_many :examinations, through: :test_sessions, dependent: :destroy
 
   validates :year, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id year]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[test_sessions questions tags]
+  end
 end

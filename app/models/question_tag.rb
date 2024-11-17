@@ -22,4 +22,8 @@
 class QuestionTag < ApplicationRecord
   belongs_to :question
   belongs_to :tag
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[question_id tag_id]
+  end
 end

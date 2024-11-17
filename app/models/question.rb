@@ -27,6 +27,10 @@ class Question < ApplicationRecord
   validates :content, presence: true
   validates :question_number, presence: true
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id content question_number test_session_id]
+  end
+
   def correct_option_numbers
     choices.where(is_correct: true).pluck(:option_number)
   end

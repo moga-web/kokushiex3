@@ -22,4 +22,8 @@ class TestSession < ApplicationRecord
   has_many :questions, dependent: :destroy
 
   validates :session, presence: true, inclusion: { in: %w[AM PM] }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id session test_id]
+  end
 end
