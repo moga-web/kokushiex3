@@ -6,7 +6,7 @@
                     <div class='m-5'>
                     <!-- 問題番号 -->
                     <div class='flex items-center font-bold space-x-2 justify-between'>
-                        <div><%= @test.decorate.question_code(question) %></div>
+                        <div><%= question_code(question) %></div>
                         <div class='flex'>
                         <% question.tags.each do |tag| %>
                             <span class='rounded-full p-2 mx-1 <%= tag.decorate.category_color %>'><%= tag.name %></span>

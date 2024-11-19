@@ -1,10 +1,5 @@
 class TestDecorator < Draper::Decorator
   delegate_all
-  # questionのdecoratorの方が適切かも
-  def question_code(question)
-    abbreviated_session = question.test_session.session == 'AM' ? 'A' : 'P'
-    "#{turn}#{abbreviated_session}#{question.question_number}"
-  end
 
   def question_code_without_turn(question)
     abbreviated_session = question.test_session.session == 'AM' ? 'A' : 'P'
