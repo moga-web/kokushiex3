@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'mini_tests/index'
   require 'sidekiq/web'
     devise_for :users, controllers: {
     registrations: 'users/registrations',
