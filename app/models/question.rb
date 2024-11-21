@@ -36,4 +36,9 @@ class Question < ApplicationRecord
     user_responses = examination.user_responses.select { |response| response.choice.question_id == id }
     user_responses.map { |response| response.choice.option_number }
   end
+
+  def self.random_questions(question_ids, question_count)
+    random_ids = question_ids.sample(question_count)
+    where(id: random_ids)
+  end
 end
