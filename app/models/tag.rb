@@ -19,5 +19,5 @@ class Tag < ApplicationRecord
 
   scope :common_tags, -> { where(id: 4..13) }
   scope :special_tags, -> { where(id: 14..26) }
-  scope :major_category, -> { where(id: 1..3) }
+  scope :major_categories, -> { where(id: 1..3) }
 end

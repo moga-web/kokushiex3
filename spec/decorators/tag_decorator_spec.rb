@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe TagDecorator do
   describe '#category_color' do
     subject { tag.decorate.category_color }
-    context 'major_categoryの場合' do
-      let(:tag) { create(:tag, :major_category) }
+    context 'major_categoriesの場合' do
+      let(:tag) { create(:tag, :major_categories) }
       it 'bg-amber-100を返す' do
         expect(subject).to eq('bg-amber-100')
       end
