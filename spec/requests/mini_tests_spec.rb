@@ -10,7 +10,7 @@ RSpec.describe "MiniTests", type: :request do
     
 
     it "returns http success" do
-      get "/mini_tests/index", params: { tag_ids: [tag.id] }
+      get "/mini_tests", params: { tag_ids: [tag.id] }
       expect(response).to have_http_status(:success)
     end
   end

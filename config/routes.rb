@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'mini_tests/index'
   require 'sidekiq/web'
     devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
     get '/select' => 'selections#index'
   end
   get '/tests/:id' => 'tests#show', as: 'test'
+  get 'mini_tests' => 'mini_tests#index'
 
   resources :examinations do
     resources :scores, only: [:show]
