@@ -1,5 +1,6 @@
 class MiniTestsController < ApplicationController
   def index
+    # TODO: Formオブジェクト化する
     tag_ids = params[:tag_ids] || []
     # タグに基づいて質問のIDリストを配列で取得
     question_ids = Question.joins(:question_tags)
