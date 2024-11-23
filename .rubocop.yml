@@ -61,29 +61,29 @@ Rails/I18nLocaleTexts:
 
 # RSpec関連の設定
 RSpec/AnyInstance:
-  Enabled: false  # allow_any_instance_ofの使用を禁止します。テストの可読性を向上させるために推奨されます。
+  Enabled: false  # allow_any_instance_ofの使用を許可。
 
 RSpec/ContextWording:
-  Enabled: false  # contextブロックの説明文が適切であるかをチェックしません。自由に記述できます。
+  Enabled: false  # contextブロックの説明文のチェックを無効化。
 
 RSpec/MultipleMemoizedHelpers:
-  Enabled: false  # 1つのテストで複数のletまたはlet!を使用することを許可します。柔軟性を持たせます。
+  Enabled: false  # 複数のletまたはlet!の使用を許可。
 
 RSpec/MultipleExpectations:
-  Enabled: false  # 1つのテスト内で複数のexpectを使用することを許可します。テストの複雑さを増す可能性がありますが、便利です。
+  Enabled: false  # 複数のexpectの使用を許可。
 
 Lint/MissingSuper:
   Exclude:
-    - 'app/components/**/*'  # オーバーライドされたメソッドでsuperを呼び出さない場合に警告を出しますが、特定のディレクトリは除外します。
+    - 'app/components/**/*'  # superを呼び出さないオーバーライドメソッドの警告を特定ディレクトリで無効化。
 
 RSpec/ExampleLength:
-  Enabled: false  # テストの例（itブロック）の長さを制限しません。長いテストも許可されます。
+  Enabled: false  # テストの例の長さ制限を無効化。
 
 RSpec/NestedGroups:
-  Enabled: false  # ネストされたdescribeやcontextグループの使用を許可します。テストの構造を柔軟にします。
+  Enabled: false  # ネストされたdescribeやcontextグループの使用を許可。
 
 RSpec/LetSetup:
-  Enabled: false  # letを使用する際のセットアップが適切であるかをチェックしません。自由に使用できます。
+  Enabled: false  # letのセットアップチェックを無効化。
 
 RSpec/NamedSubject:
-  Enabled: false  # subjectに名前を付けることを推奨しません。名前を付けなくても警告は表示されません。
+  Enabled: false  # subjectに名前を付けることを強制しない。
