@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :question do
-    association :test_session
+    test_session
     question_number { rand(1..100) }
     content { Faker::Lorem.sentence(word_count: 3) }
   end
