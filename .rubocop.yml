@@ -20,32 +20,70 @@ AllCops:
     - 'vendor/**/*'
     - 'db/**/*'
     - 'bin/**/*'
-    - 'spec/**/*'
+    - 'tmp/**/*'
     - 'config/**/*'
     - 'lib/tasks/auto_annotate_models.rake'
+# Rails: Rails関連のルールを有効にする
 Rails:
   Enabled: true
 
+# Metrics/AbcSize: メソッドの複雑さの最大値を25に設定
 Metrics/AbcSize:
   Max: 25
 
+# Style/AsciiComments: ASCIIコメントのスタイルチェックを無効にする
 Style/AsciiComments:
   Enabled: false
 
+# Style/ClassAndModuleChildren: クラスとモジュールの子要素のスタイルチェックを無効にする
 Style/ClassAndModuleChildren:
   Enabled: false
 
+# Style/Documentation: ドキュメンテーションスタイルチェックを無効にする
 Style/Documentation:
   Enabled: false
 
+# Naming/PredicateName: プレディケート名のスタイルチェックを無効にする
 Naming/PredicateName:
   Enabled: false
 
+# Style/FrozenStringLiteralComment: フローズン文字列リテラルコメントのスタイルチェックを無効にする
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+# Style/StringLiterals: 文字列リテラルのスタイルをシングルクォートに強制
 Style/StringLiterals:
   EnforcedStyle: single_quotes
 
+# Rails/I18nLocaleTexts: I18nロケールテキストのスタイルチェックを無効にする
 Rails/I18nLocaleTexts:
   Enabled: false
+
+# RSpec関連の設定
+RSpec/AnyInstance:
+  Enabled: false  # allow_any_instance_ofの使用を禁止します。テストの可読性を向上させるために推奨されます。
+
+RSpec/ContextWording:
+  Enabled: false  # contextブロックの説明文が適切であるかをチェックしません。自由に記述できます。
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false  # 1つのテストで複数のletまたはlet!を使用することを許可します。柔軟性を持たせます。
+
+RSpec/MultipleExpectations:
+  Enabled: false  # 1つのテスト内で複数のexpectを使用することを許可します。テストの複雑さを増す可能性がありますが、便利です。
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/components/**/*'  # オーバーライドされたメソッドでsuperを呼び出さない場合に警告を出しますが、特定のディレクトリは除外します。
+
+RSpec/ExampleLength:
+  Enabled: false  # テストの例（itブロック）の長さを制限しません。長いテストも許可されます。
+
+RSpec/NestedGroups:
+  Enabled: false  # ネストされたdescribeやcontextグループの使用を許可します。テストの構造を柔軟にします。
+
+RSpec/LetSetup:
+  Enabled: false  # letを使用する際のセットアップが適切であるかをチェックしません。自由に使用できます。
+
+RSpec/NamedSubject:
+  Enabled: false  # subjectに名前を付けることを推奨しません。名前を付けなくても警告は表示されません。

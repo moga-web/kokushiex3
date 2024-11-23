@@ -21,8 +21,8 @@
 #
 FactoryBot.define do
   factory :examination do
-    user { create(:user) }
-    test { create(:test) }
+    user { association :user }
+    test { association :test }
     attempt_date { Time.zone.now }
   end
 end

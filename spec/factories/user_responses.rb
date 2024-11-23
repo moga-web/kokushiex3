@@ -20,11 +20,12 @@
 #
 FactoryBot.define do
   factory :user_response do
-    association :examination
-    association :choice
+    examination
+    choice
 
     after(:build) do |user_response|
-      user_response.choice ||= create(:choice, question: create(:question, test_session: user_response.examination.test_session))
+      user_response.choice ||= create(:choice,
+                                      question: create(:question, test_session: user_response.examination.test_session))
     end
   end
 end

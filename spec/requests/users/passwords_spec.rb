@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users::passwords' do
-  let(:user) {create(:user)}
+  let(:user) { create(:user) }
 
   describe 'GET /users/password/new' do
     it 'パスワードリセットリクエスト送信先入力用のformが表示される' do
@@ -37,8 +37,8 @@ RSpec.describe 'Users::passwords' do
         user: {
           reset_password_token:,
           password: 'new-password',
-          password_confirmation: 'new-password',
-        },
+          password_confirmation: 'new-password'
+        }
       }
     end
 
