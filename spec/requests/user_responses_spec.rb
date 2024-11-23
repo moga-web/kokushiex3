@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'UserResponses', type: :request do
+RSpec.describe 'UserResponses' do
   describe 'POST /create' do
     let(:user) { create(:user) }
     let(:test) { create(:test) }
@@ -24,7 +24,7 @@ RSpec.describe 'UserResponses', type: :request do
       end
 
       it 'user_responseが作成されリダイレクトされる' do
-        post user_responses_path, params: params
+        post(user_responses_path, params:)
         expect(response).to redirect_to(dashboard_path)
         expect(flash[:notice]).to eq '試験結果を保存しました'
       end
@@ -36,11 +36,10 @@ RSpec.describe 'UserResponses', type: :request do
       end
 
       it 'newテンプレートがレンダリングされ、エラーメッセージが表示される' do
-        post user_responses_path, params: params
+        post(user_responses_path, params:)
         expect(response).to redirect_to(test_path(params[:test_id]))
         expect(flash[:alert]).to eq '試験結果を保存できませんでした'
       end
     end
   end
 end
-

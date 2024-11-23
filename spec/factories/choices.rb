@@ -20,9 +20,9 @@
 #
 FactoryBot.define do
   factory :choice do
-    association :question
+    question
     content { Faker::Lorem.sentence(word_count: 1) }
-    is_correct { Faker::Boolean.boolean }  # ランダムなtrue/falseを生成
+    is_correct { Faker::Boolean.boolean } # ランダムなtrue/falseを生成
     option_number { rand(1..5) }
   end
 end

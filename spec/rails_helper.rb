@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rspec'
@@ -37,7 +37,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
 
   # テスト環境全体でのホスト情報設定
-  config.before(:each) do
+  config.before do
     ActionMailer::Base.default_url_options[:host] = 'localhost:3000'
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
