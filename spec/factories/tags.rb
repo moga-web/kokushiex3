@@ -15,7 +15,7 @@ FactoryBot.define do
   factory :tag do
     name { Faker::Lorem.word }
 
-    trait :major_category do
+    trait :major_categories do
       id { 1 }
     end
 

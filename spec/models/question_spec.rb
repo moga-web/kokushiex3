@@ -57,4 +57,13 @@ RSpec.describe Question do
       end
     end
   end
+
+  describe '#random_questions' do
+    let(:question_ids) { create_list(:question, 10).pluck(:id) }
+    let(:question_count) { 5 }
+
+    it '指定された数の質問がランダムに返される' do
+      expect(described_class.random_questions(question_ids, question_count).count).to eq(question_count)
+    end
+  end
 end
