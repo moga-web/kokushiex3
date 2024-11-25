@@ -60,11 +60,11 @@ ja:
         message: パスワードが再設定されました。
         subject: パスワードの変更について
       reset_password_instructions:
-        action: パスワード変更
-        greeting: "%{recipient}様"
-        instruction: パスワード再設定の依頼を受けたため、メールを送信しています。下のリンクからパスワードの再設定ができます。
-        instruction_2: パスワード再設定の依頼をしていない場合、このメールを無視してください。
-        instruction_3: パスワードの再設定は、上のリンクから新しいパスワードを登録するまで完了しません。
+        action: パスワードの再設定
+        greeting: "%{recipient} 様"
+        instruction: 国試ex_PTのパスワード再設定を受付ました。下記リンクよりパスワードを再設定してください。
+        instruction_2: お心当たりのない場合はこのメールを無視してください
+        instruction_3: ※本メールの受信時点ではパスワードの再設定は完了していません
         subject: パスワードの再設定について
       unlock_instructions:
         action: アカウントのロック解除
@@ -79,11 +79,11 @@ ja:
       edit:
         change_my_password: パスワードを変更する
         change_your_password: パスワードを変更
-        confirm_new_password: 確認用新しいパスワード
+        confirm_new_password: 新しいパスワードの確認
         new_password: 新しいパスワード
       new:
-        forgot_your_password: パスワードを忘れましたか？
-        send_me_reset_password_instructions: パスワードの再設定方法を送信する
+        title: パスワードの再設定
+        send_me_reset_password_instructions: パスワードの再設定用リンクを送信
       no_token: このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。
       send_instructions: パスワードの再設定について数分以内にメールでご連絡いたします。
       send_paranoid_instructions: メールアドレスが登録済みの場合、パスワード再設定用のメールが数分以内に送信されます。

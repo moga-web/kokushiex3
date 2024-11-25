@@ -1,0 +1,13 @@
+<h1>採点結果</h1>
+
+<p>受験日: <%= @examination.attempt_date.strftime('%Y-%m-%d') %></p>
+
+<% if @score %>
+  <p>総得点: <%= @score.total_score %></p>
+  <p>共通スコア: <%= @score.common_score %></p>
+  <p>実地スコア: <%= @score.practical_score %></p>
+<% else %>
+  <p>スコアが見つかりません。</p>
+<% end %>
+
+<%= link_to 'ダッシュボードに戻る', dashboard_path %>
