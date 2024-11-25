@@ -1,7 +1,10 @@
 class MiniTestsController < ApplicationController
   def index
-    Rails.logger.debug(params.inspect)
-    @questions = MiniTestSearchForm.new(params[:search]).search
+    @questions = if params[:search][:tag_ids].present?
+                   MiniTestSearchForm.new(params[:search]).search
+                 else
+                   redirect_to tests_select_path, alert: 'タグを選択してください'
+                 end
 
     @user_responses = []
   end
