@@ -6,7 +6,7 @@ RSpec.describe MiniTestSearchForm do
     {
       search: {
         tag_ids: [tag.id],
-        question_count: 10
+        question_count: 5 # 本来は10が最低だが絞り込みテストの件数を削減するために5に設定
       }
     }
   end
@@ -15,7 +15,7 @@ RSpec.describe MiniTestSearchForm do
   describe '#new' do
     it 'params[:search]を受け取りインスタンスが生成される' do
       expect(form.tag_ids).to eq([tag.id])
-      expect(form.question_count).to eq(10)
+      expect(form.question_count).to eq(5)
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe MiniTestSearchForm do
 
     it 'question_countをもとに取得する質問数を制限する' do
       questions = form.search
-      expect(questions.count).to eq(10)
+      expect(questions.count).to eq(5)
     end
   end
 end
