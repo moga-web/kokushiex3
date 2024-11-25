@@ -25,7 +25,7 @@ RSpec.describe 'MiniTests' do
     end
 
     context 'タグを指定していない場合' do
-      let!(:params) do
+      let(:params) do
         {
           search: {
             tag_ids: nil,

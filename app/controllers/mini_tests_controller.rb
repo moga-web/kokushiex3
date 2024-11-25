@@ -1,6 +1,6 @@
 class MiniTestsController < ApplicationController
   def index
-    form = MiniTestSearchForm.new(params)
+    form = MiniTestSearchForm.new(search_params)
     if form.valid?
       @questions = form.search
       @user_responses = []
