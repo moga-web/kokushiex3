@@ -12,7 +12,7 @@ class MiniTestSearchForm
 
   def initialize(params)
     @tag_ids = params[:tag_ids] || []
-    @question_count = params[:question_count].to_i
+    @question_count = params[:question_count].to_i || 10
   end
 
   def search

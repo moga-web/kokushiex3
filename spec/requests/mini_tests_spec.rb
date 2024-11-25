@@ -7,9 +7,17 @@ RSpec.describe 'MiniTests' do
     let(:tag) { create(:tag) }
     let!(:question) { create(:question, test_session:) }
     let!(:question_tag) { create(:question_tag, question:, tag:) }
+    let(:params) do
+      {
+        search: {
+          tag_ids: [tag.id],
+          question_count: 10
+        }
+      }
+    end
 
     it 'returns http success' do
-      get '/mini_tests', params: { search: { tag_ids: [tag.id], question_count: 1 } }
+      get('/mini_tests', params:)
       expect(response).to have_http_status(:success)
     end
   end

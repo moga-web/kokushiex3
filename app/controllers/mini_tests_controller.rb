@@ -1,6 +1,7 @@
 class MiniTestsController < ApplicationController
   def index
-    @questions = MiniTestSearchForm.new(params).search
+    Rails.logger.debug(params.inspect)
+    @questions = MiniTestSearchForm.new(params[:search]).search
 
     @user_responses = []
   end
