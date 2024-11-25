@@ -1,10 +1,11 @@
 class MiniTestsController < ApplicationController
   def index
-    if params[:search].present? && params[:search][:tag_ids].blank?
-      redirect_to tests_select_path, alert: 'タグを選択してください'
-    else
-      @questions = MiniTestSearchForm.new(params[:search]).search
+    form = MiniTestSearchForm.new(params[:search])
+    if form.valid?
+      @questions = form.search
       @user_responses = []
+    else
+      redirect_to tests_select_path, alert: form.errors.full_messages.join(', ')
     end
   end
 end

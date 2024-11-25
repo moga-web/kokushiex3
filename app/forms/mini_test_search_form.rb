@@ -7,7 +7,7 @@ class MiniTestSearchForm
   attribute :tag_ids, :integer
   attribute :question_count, :integer
 
-  validates :tag_ids, presence: true
+  validates :tag_ids, presence: { message: 'タグを選択してください' }
   validates :question_count, presence: true
 
   def initialize(params)
