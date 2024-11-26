@@ -39,15 +39,15 @@
               <h3 class='font-bold text-gray-900'>問題数を選択</h3>
               <div class='flex flex-wrap justify-start'>
                 <div class='mr-4'>
-                  <%= radio_button_tag 'question_count', 10, false, id: 'question_count_10' %>
+                  <%= radio_button_tag 'search[question_count]', 10, true, id: 'question_count_10' %>
                   <%= label_tag 'question_count_10', '10問' %>
                 </div>
                 <div class='mr-4'>
-                  <%= radio_button_tag 'question_count', 20, false, id: 'question_count_20' %>
+                  <%= radio_button_tag 'search[question_count]', 20, false, id: 'question_count_20' %>
                   <%= label_tag 'question_count_20', '20問' %>
                 </div>
                 <div class='mr-4'>
-                  <%= radio_button_tag 'question_count', 30, false, id: 'question_count_30' %>
+                  <%= radio_button_tag 'search[question_count]', 30, false, id: 'question_count_30' %>
                   <%= label_tag 'question_count_30', '30問' %>
                 </div>
               </div>
@@ -56,7 +56,7 @@
               <div class='flex flex-wrap justify-start'>
                 <% @major_categories.each do |tag| %>
                   <div class='mt-3 mr-2 bg-amber-100 text-gray-800 font-bold py-2 px-4 shadow-xl text-center'>
-                    <%= check_box_tag 'tag_ids[]', tag.id, false, id: "tag_#{tag.id}" %>
+                    <%= check_box_tag 'search[tag_ids][]', tag.id, false, id: "tag_#{tag.id}" %>
                     <%= label_tag "tag_#{tag.id}", tag.name %>
                   </div>
                 <% end %>
@@ -65,7 +65,7 @@
               <div class='flex flex-wrap justify-start'>
                 <% @common_tags.each do |tag| %>
                   <div class='mt-3 mr-2 bg-green-100 text-gray-800 font-bold py-2 px-4 shadow-xl text-center'>
-                    <%= check_box_tag 'tag_ids[]', tag.id, false, id: "tag_#{tag.id}" %>
+                    <%= check_box_tag 'search[tag_ids][]', tag.id, false, id: "tag_#{tag.id}" %>
                     <%= label_tag "tag_#{tag.id}", tag.name %>
                   </div>
                 <% end %>
@@ -74,7 +74,7 @@
               <div class='flex flex-wrap justify-start'>
                 <% @special_tags.each do |tag| %>
                   <div class='mt-3 mr-2 bg-blue-100 text-gray-800 font-bold py-2 px-4 shadow-xl text-center'>
-                    <%= check_box_tag 'tag_ids[]', tag.id, false, id: "tag_#{tag.id}" %>
+                    <%= check_box_tag 'search[tag_ids][]', tag.id, false, id: "tag_#{tag.id}" %>
                     <%= label_tag "tag_#{tag.id}", tag.name %>
                   </div>
                 <% end %>
