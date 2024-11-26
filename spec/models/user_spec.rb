@@ -73,4 +73,11 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '#create_guest' do
+    it 'ゲストユーザーが作成できる' do
+      user = described_class.create_guest
+      expect(user).to be_guest
+    end
+  end
 end

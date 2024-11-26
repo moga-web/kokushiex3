@@ -19,9 +19,17 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def guest_sign_in
-    user = User.guest
+    user = User.create_guest
     sign_in user
     redirect_to tests_select_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
+  def guest_sign_out
+    return unless current_user.guest?
+
+    current_user.destroy
+    sign_out current_user
+    redirect_to root_path, notice: 'ゲストユーザーからログアウトしました。'
   end
 
   # protected
