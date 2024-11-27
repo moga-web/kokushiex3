@@ -35,13 +35,16 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   def self.create_guest
-    find_or_create_by(email: 'guest@example.com') do |user|
+    unique_email = "guest_#{SecureRandom.hex(5)}@example.com"
+    create do |user|
+      user.email = unique_email
       user.username = 'ゲストユーザー'
       user.password = SecureRandom.urlsafe_base64
     end
   end
 
   def guest?
-    email == 'guest@example.com'
+    # ゲストユーザーのメールアドレスの型をチェック
+    email.start_with?('guest_') && email.end_with?('@example.com')
   end
 end
