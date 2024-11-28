@@ -1,16 +1,17 @@
 class MiniTestsController < ApplicationController
   def index
-    # TODO: Formオブジェクト化する
-    tag_ids = params[:tag_ids] || []
-    # タグに基づいて質問のIDリストを配列で取得
-    question_ids = Question.joins(:question_tags)
-                           .where(question_tags: { tag_id: tag_ids })
-                           .distinct
-                           .pluck(:id)
-    # ランダムに選択する問題数を指定
-    question_count = params[:question_count].to_i
-    @questions = Question.random_questions(question_ids, question_count)
+    form = MiniTestSearchForm.new(search_params)
+    if form.valid?
+      @questions = form.search
+      @user_responses = []
+    else
+      redirect_to tests_select_path, alert: form.errors.full_messages.join(', ')
+    end
+  end
 
-    @user_responses = []
+  private
+
+  def search_params
+    params.require(:search).permit(tag_ids: [], question_count: nil)
   end
 end
