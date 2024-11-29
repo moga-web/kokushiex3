@@ -18,6 +18,7 @@ jobs:
       image: ruby:3.3.1
       env:
         RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
     steps:
         - uses: actions/checkout@v4
         - name: bundler config
