@@ -82,25 +82,27 @@ RSpec.describe User do
   end
 
   describe '#guest?' do
+    subject { user.guest? }
+
+    let(:user) { create(:user, email:) }
+
     context 'アドレスが指定した型の場合' do
-      it 'trueを返す' do
-        user = described_class.create(username: 'newuser', email: 'guest_user_new@example.com', password: 'password',
-                                      password_confirmation: 'password')
-        expect(user.guest?).to be true
-      end
+      let(:email) { 'guest_user_new@example.com' }
+
+      it { is_expected.to be true }
     end
 
     context 'アドレスが指定した型でない場合' do
-      it 'guest_で始まらない場合はfalseを返す' do
-        user = described_class.create(username: 'newuser', email: 'non_guest_user@example.com', password: 'password',
-                                      password_confirmation: 'password')
-        expect(user.guest?).to be false
+      context 'guest_で始まらない場合' do
+        let(:email) { 'non_guest_user@example.com' }
+
+        it { is_expected.to be false }
       end
 
-      it '@example.comで終わらない場合はfalseを返す' do
-        user = described_class.create(username: 'newuser', email: 'guest_user@gmail.com', password: 'password',
-                                      password_confirmation: 'password')
-        expect(user.guest?).to be false
+      context '@example.comで終わらない場合' do
+        let(:email) { 'guest_user@gmail.com' }
+
+        it { is_expected.to be false }
       end
     end
   end
