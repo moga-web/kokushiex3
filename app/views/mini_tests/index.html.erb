@@ -1,6 +1,5 @@
 <%= form_with url: user_responses_path, method: :post do |f| %>
-  <%# mini_testフラグを持たせる %>
-  <%# = hidden_field_tag :test_id, @test.id %>
+  <%= @questions.length %>
   <%= render 'tests/question', question: @questions %>
   <div class="text-center justify-center">
     <%= f.submit 'テストを終了する',
