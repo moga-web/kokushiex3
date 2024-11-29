@@ -1,5 +1,4 @@
 <%= form_with url: user_responses_path, method: :post do |f| %>
-  <%= @questions.length %>
   <%= render 'tests/question', question: @questions %>
   <div class="text-center justify-center">
     <%= f.submit 'テストを終了する',
