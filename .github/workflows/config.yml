@@ -36,6 +36,7 @@ jobs:
             bundle install --jobs 4 --retry 3
         - name: setup db schema
           run: |
+            export RAILS_ENV=test # デフォルトのtest_databaseを探さないように明示的に指定
             bin/rails db:create
             bin/rails db:migrate
         - name: Precompile assets
