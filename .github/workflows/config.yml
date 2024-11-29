@@ -13,7 +13,7 @@ jobs:
         env:
           TZ: "Asia/Tokyo"
           MYSQL_ROOT_PASSWORD: password
-          options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
     container:
       image: ruby:3.3.1
       env:

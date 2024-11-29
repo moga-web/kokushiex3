@@ -9,11 +9,18 @@
         <%= link_to '過去問演習', tests_select_path, class: 'mr-5 hover:text-orange-300 block' %>
         <% if user_signed_in? %>
             <div class="mr-5 hover:text-orange-300">
-                <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+                <% if current_user.guest? %>
+                    <%= button_to 'ゲストログアウト', users_guest_sign_out_path, method: :delete,
+                                                                         data: { turbo_method: :delete } %>
+                <% else %>
+                    <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+                <% end %>
             </div>
             <%= link_to 'マイページ', account_path, class: 'mr-5 hover:text-orange-300 block' %>
         <% else %>
             <%= link_to 'ログイン', new_user_session_path, class: 'mr-5 hover:text-orange-300 block' %>
+            <%= link_to 'ゲストログイン', users_guest_sign_in_path, data: { 'turbo-method': :post },
+                                                             class: 'mr-5 hover:text-orange-300 block' %>
         <% end %>
     </nav>
 </div>
