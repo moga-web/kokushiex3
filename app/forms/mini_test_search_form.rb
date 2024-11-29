@@ -2,11 +2,15 @@ class MiniTestSearchForm
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  attribute :tag_ids, default: []
-  attribute :question_count, :integer, default: 10
+  attr_accessor :tag_ids, :question_count
 
   validates :tag_ids, presence: { message: 'タグを選択してください' }
   validates :question_count, presence: true
+
+  def initialize(params = {})
+    @tag_ids = params.dig(:search, :tag_ids) || []
+    @question_count = params.dig(:search, :question_count).to_i
+  end
 
   def search
     question_ids = Question.joins(:question_tags)
