@@ -83,7 +83,8 @@ RSpec.describe User do
 
   describe '#guest?' do
     it 'ゲストユーザーの場合はtrueを返す' do
-      user = described_class.create_guest
+      user = described_class.create(username: 'ゲストユーザー', email: 'guest_user@example.com', password: 'password',
+                                    password_confirmation: 'password')
       expect(user.guest?).to be true
     end
 
