@@ -9,7 +9,7 @@ class MiniTestsController < ApplicationController
     end
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @selected_answers = Choice.where(id: params[:user_response][:choice_ids])
                               .group_by(&:question_id)
                               .transform_values { |choices| choices.map(&:option_number) }
@@ -17,8 +17,10 @@ class MiniTestsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace('mini_test_answers', partial: 'mini_tests/answers',
-                                                                       locals: { selected_answers: @selected_answers, questions: @questions })
+        render turbo_stream: turbo_stream.replace('mini_test_answers',
+                                                  partial: 'mini_tests/answers',
+                                                  locals: { selected_answers: @selected_answers,
+                                                            questions: @questions })
         format.html
       end
     end

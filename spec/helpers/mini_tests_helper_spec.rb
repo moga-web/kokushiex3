@@ -11,5 +11,25 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe MiniTestsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#correct_answer_icon' do
+    subject { helper.correct_answer_icon(selected_answers, question) }
+
+    let(:question) { create(:question) }
+
+    context '正答の場合' do
+      let(:correct_choice) { create(:choice, question:, is_correct: true, option_number: 1) }
+      # コントローラでハッシュにしている
+      let(:selected_answers) { { question.id => [correct_choice.option_number] } }
+
+      it { is_expected.to eq('⭕️') }
+    end
+
+    context '誤答の場合' do
+      let(:incorrect_choice) { create(:choice, question:, is_correct: false, option_number: 2) }
+      # コントローラでハッシュにしている
+      let(:selected_answers) { { question.id => [incorrect_choice.option_number] } }
+
+      it { is_expected.to eq('❌') }
+    end
+  end
 end
