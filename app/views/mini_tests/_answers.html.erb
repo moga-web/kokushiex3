@@ -1,5 +1,5 @@
 <% if selected_answers.present? %>
-  <div class="flex justify-center items-center min-h-screen">
+  <div class="flex justify-center items-center mb-5">
     <div class="grid grid-cols-1 gap-2">
       <table class="table-auto w-full max-w-4xl text-center border-collapse">
         <% questions.each_slice(10) do |questions_slice| %>
@@ -30,9 +30,21 @@
                 </td>
               <% end %>
             </tr>
+            <tr>
+              <td class="border border-gray-300 px-2 py-1">正誤</td>
+              <% questions_slice.each do |question| %>
+                <td class="border border-gray-300 px-2 py-1 bg-green-100">
+                  <%= correct_answer_icon(selected_answers, question) %>
+                </td>
+              <% end %>
+            </tr>
           </tbody>
         <% end %>
       </table>
     </div>
+  </div>
+  <div class="text-center justify-center">
+    <%= link_to '問題選択画面に戻る', tests_select_path, class: 'bg-sky-100 text-gray-700 hover:bg-sky-500 hover:text-orange-300
+                    font-bold py-2 px-4 rounded-lg shadow-xl' %>
   </div>
 <% end %>
