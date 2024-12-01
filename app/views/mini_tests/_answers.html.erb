@@ -1,0 +1,38 @@
+<% if selected_answers.present? %>
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="grid grid-cols-1 gap-2">
+      <table class="table-auto w-full max-w-4xl text-center border-collapse">
+        <% questions.each_slice(10) do |questions_slice| %>
+          <thead>
+            <tr>
+              <th class="border-b-2 border-gray-300 px-2 py-1">問題番号</th>
+              <% questions_slice.each do |question| %>
+                <th class="border-b-2 border-gray-300 px-2 py-1">
+                  <%= question_code(question) %>
+                </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-300 px-2 py-1">回答</td>
+              <% questions_slice.each do |question| %>
+                <td class="border border-gray-300 px-2 py-1 bg-sky-100">
+                  <%= selected_answers[question.id]&.join(', ') %>
+                </td>
+              <% end %>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 px-2 py-1">正答</td>
+              <% questions_slice.each do |question| %>
+                <td class="border border-gray-300 px-2 py-1 bg-green-100">
+                  <%= question.correct_option_numbers.join(', ') %>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>

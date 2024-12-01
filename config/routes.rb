@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get '/select' => 'selections#index'
   end
   get '/tests/:id' => 'tests#show', as: 'test'
-  get 'mini_tests' => 'mini_tests#index'
+  resources :mini_tests, only: [:index, :create]
 
   resources :examinations do
     resources :scores, only: [:show]

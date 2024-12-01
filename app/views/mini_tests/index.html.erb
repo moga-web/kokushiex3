@@ -1,4 +1,7 @@
-<%= form_with url: user_responses_path, method: :post do |f| %>
+<%= form_with url: mini_tests_path, html: { data: { turbo_frame: 'mini_test_answers' } } do |f| %>
+  <% @questions.each do |question| %>
+    <%= hidden_field_tag 'question_ids[]', question.id %>
+  <% end %>
   <%= render 'tests/question', question: @questions %>
   <div class="text-center justify-center">
     <%= f.submit 'テストを終了する',
@@ -6,3 +9,7 @@
                     font-bold py-2 px-4 rounded-lg shadow-xl' %>
   </div>
 <% end %>
+
+  <%= turbo_frame_tag 'mini_test_answers' do %>
+    <%= render 'mini_tests/answers', selected_answers: @selected_answers, questions: @questions %>
+  <% end %>
