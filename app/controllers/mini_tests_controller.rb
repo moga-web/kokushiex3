@@ -10,9 +10,7 @@ class MiniTestsController < ApplicationController
   end
 
   def create
-    @selected_answers = Choice.where(id: params[:user_response][:choice_ids])
-                              .group_by(&:question_id)
-                              .transform_values { |choices| choices.map(&:option_number) }
+    @selected_answers = Choice.mini_test_answers(params[:user_response][:choice_ids])
     @questions = Question.where(id: params[:question_ids])
 
     respond_to do |format|
