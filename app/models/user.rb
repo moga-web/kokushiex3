@@ -21,7 +21,6 @@
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_username              (username) UNIQUE
 #
 class User < ApplicationRecord
   has_many :examinations, dependent: :destroy
@@ -33,4 +32,18 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }
+
+  def self.create_guest
+    unique_email = "guest_#{SecureRandom.hex(5)}@example.com"
+    create do |user|
+      user.email = unique_email
+      user.username = 'ゲストユーザー'
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
+  def guest?
+    # ゲストユーザーのメールアドレスの型をチェック
+    email.start_with?('guest_') && email.end_with?('@example.com')
+  end
 end

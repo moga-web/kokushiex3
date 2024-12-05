@@ -21,7 +21,6 @@
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_username              (username) UNIQUE
 #
 require 'rails_helper'
 
@@ -70,6 +69,39 @@ RSpec.describe User do
         user = described_class.new(username: 'newuser', email: 'newuser@example.com', password: '12345',
                                    password_confirmation: '12345')
         expect(user).not_to be_valid
+      end
+    end
+  end
+
+  describe '#create_guest' do
+    it 'ゲストユーザーが作成できる' do
+      user = described_class.create_guest
+      expect(user).to be_guest
+    end
+  end
+
+  describe '#guest?' do
+    subject { user.guest? }
+
+    let(:user) { create(:user, email:) }
+
+    context 'アドレスが指定した型の場合' do
+      let(:email) { 'guest_user_new@example.com' }
+
+      it { is_expected.to be true }
+    end
+
+    context 'アドレスが指定した型でない場合' do
+      context 'guest_で始まらない場合' do
+        let(:email) { 'non_guest_user@example.com' }
+
+        it { is_expected.to be false }
+      end
+
+      context '@example.comで終わらない場合' do
+        let(:email) { 'guest_user@gmail.com' }
+
+        it { is_expected.to be false }
       end
     end
   end

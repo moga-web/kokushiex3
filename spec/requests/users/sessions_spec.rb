@@ -26,4 +26,26 @@ RSpec.describe 'Users::sessions' do
       end
     end
   end
+
+  describe 'POST /users/guest_sign_in' do
+    it 'ゲストユーザーとしてログインできる' do
+      post users_guest_sign_in_path
+      expect(response).to redirect_to(tests_select_path)
+      expect(response).to have_http_status(:found)
+    end
+  end
+
+  describe 'DELETE /users/guest_sign_out' do
+    let(:guest_user) { User.create_guest }
+
+    before do
+      sign_in guest_user
+    end
+
+    it 'ゲストユーザーからログアウトできる' do
+      delete users_guest_sign_out_path
+      expect(response).to redirect_to(root_path)
+      expect(response).to have_http_status(:found)
+    end
+  end
 end

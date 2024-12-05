@@ -1,6 +1,6 @@
 class MiniTestsController < ApplicationController
   def index
-    form = MiniTestSearchForm.new(search_params)
+    form = MiniTestSearchForm.new(params)
     if form.valid?
       @questions = form.search
       @user_responses = []
@@ -9,9 +9,12 @@ class MiniTestsController < ApplicationController
     end
   end
 
-  private
+  def create
+    @selected_answers = Choice.mini_test_answers(params[:user_response][:choice_ids])
+    @questions = Question.where(id: params[:question_ids])
 
-  def search_params
-    params.require(:search).permit(tag_ids: [], question_count: nil)
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 end

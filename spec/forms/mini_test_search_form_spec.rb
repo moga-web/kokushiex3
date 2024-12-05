@@ -10,7 +10,7 @@ RSpec.describe MiniTestSearchForm do
       }
     }
   end
-  let!(:form) { described_class.new(params[:search]) }
+  let!(:form) { described_class.new(params) }
 
   describe '#new' do
     it 'params[:search]を受け取りインスタンスが生成される' do

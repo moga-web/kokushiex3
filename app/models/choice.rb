@@ -23,4 +23,8 @@ class Choice < ApplicationRecord
   has_many :user_responses, dependent: :destroy
 
   validates :option_number, presence: true, numericality: { in: 1..5 }
+
+  def self.mini_test_answers(choice_ids)
+    where(id: choice_ids).group_by(&:question_id).transform_values { |choices| choices.map(&:option_number) }
+  end
 end
