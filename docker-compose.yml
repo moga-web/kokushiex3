@@ -18,7 +18,7 @@ services:
     stdin_open: true
 
   db:
-    image: mysql:8.0.39
+    image: mysql:8.3
     # m1はplatformを指定して、linux/amd64にエミュレートする指定をすることで正常に動く
     platform: linux/amd64
     # DBのレコードが日本語だと文字化けするので、utf8をセットする

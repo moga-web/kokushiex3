@@ -23,11 +23,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_01_115026) do
 
   create_table "examinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "test_id"
+    t.bigint "test_id", null: false
     t.datetime "attempt_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "mini_test"
     t.index ["test_id"], name: "index_examinations_on_test_id"
     t.index ["user_id"], name: "index_examinations_on_user_id"
   end
