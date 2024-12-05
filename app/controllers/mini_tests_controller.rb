@@ -8,4 +8,13 @@ class MiniTestsController < ApplicationController
       redirect_to tests_select_path, alert: form.errors.full_messages.join(', ')
     end
   end
+
+  def create
+    @selected_answers = Choice.mini_test_answers(params[:user_response][:choice_ids])
+    @questions = Question.where(id: params[:question_ids])
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
 end

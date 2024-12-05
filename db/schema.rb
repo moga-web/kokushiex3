@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_11_010832) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_01_115026) do
   create_table "choices", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "content", null: false
@@ -23,10 +23,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_11_010832) do
 
   create_table "examinations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "test_id", null: false
+    t.bigint "test_id"
     t.datetime "attempt_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "mini_test"
     t.index ["test_id"], name: "index_examinations_on_test_id"
     t.index ["user_id"], name: "index_examinations_on_user_id"
   end
@@ -117,7 +118,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_11_010832) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "choices", "questions"
