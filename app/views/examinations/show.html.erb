@@ -57,14 +57,18 @@
 
         <!-- 回答確認セクション -->
         <div data-controller="results-display" class='mb-10 mt-5'>
+            <!--
             <div class="flex">
                 <button data-action="results-display#switchingDisplayTypes" class='bg-sky-100 text-black font-bold py-2 px-4 rounded'>
                 正誤表
                 </button>
+
                 <button data-action="results-display#switchingDisplayTypes" class='bg-purple-300 text-black font-bold py-2 px-4 rounded'>
                 正答率
                 </button>
+
             </div>
+            -->
 
             <!-- 正誤表 -->
             <div data-results-display-target="errata" class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
@@ -89,6 +93,7 @@
                 </div>
             </div>
             <!-- 正答率 -->
+            <!--
             <div data-results-display-target="errorRatio" class='hidden w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
                 <div class='flex'>
                     <div class='w-full h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-xl'>
@@ -98,6 +103,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </div>
