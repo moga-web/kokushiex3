@@ -80,7 +80,7 @@ RSpec.describe Score do
       let(:practical_question) { create(:question, test_session:, question_number: (1..20).to_a.sample) }
       let(:practical_choice) { create(:choice, question: practical_question, is_correct: true) }
       let(:common_choice) { create(:choice, question: common_question, is_correct: true) }
-      let!(:common_responses) { create_list(:user_response, 20, examination:, choice: common_choice) } # rubocop:disable FactoryBot/ExcessiveCreateList
+      let!(:common_responses) { create_list(:user_response, 20, examination:, choice: common_choice) }
       let!(:practical_responses) { create_list(:user_response, 10, examination:, choice: practical_choice) }
 
       before do
