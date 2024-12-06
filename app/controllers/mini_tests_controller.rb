@@ -1,4 +1,5 @@
 class MiniTestsController < ApplicationController
+  before_action :authenticate_user!
   def index
     form = MiniTestSearchForm.new(params)
     if form.valid?

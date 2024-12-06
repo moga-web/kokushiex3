@@ -1,4 +1,5 @@
 class ExaminationsController < ApplicationController
+  before_action :authenticate_user!
   def show
     @examination = current_user.examinations.find(params[:id])
     @score = @examination.score
