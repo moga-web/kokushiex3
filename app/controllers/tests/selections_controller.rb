@@ -1,4 +1,5 @@
 class Tests::SelectionsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @tests = Test.all.decorate
     @common_tags = Tag.common_tags
