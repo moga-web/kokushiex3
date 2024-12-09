@@ -101,3 +101,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+group :staging do
+  gem 'pg'
+end
