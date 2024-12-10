@@ -1,0 +1,21 @@
+databases:
+  - name: kokushiEx_staging
+    databaseName: kokushiex_staging
+    user: kokushiex_for_PT
+    region: singapore
+
+services:
+  - type: web
+    name: kokushiex_for_PT
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kokushiEx_staging
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
