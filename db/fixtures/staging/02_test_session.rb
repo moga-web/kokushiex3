@@ -1,0 +1,22 @@
+TestSession.seed(:id, [
+  { id: 1, test_id: 1, session: 'AM' },
+  { id: 2, test_id: 1, session: 'PM' },
+  { id: 3, test_id: 2, session: 'AM' },
+  { id: 4, test_id: 2, session: 'PM' },
+  { id: 5, test_id: 3, session: 'AM' },
+  { id: 6, test_id: 3, session: 'PM' },
+  { id: 7, test_id: 4, session: 'AM' },
+  { id: 8, test_id: 4, session: 'PM' },
+  { id: 9, test_id: 5, session: 'AM' },
+  { id: 10, test_id: 5, session: 'PM' },
+  { id: 11, test_id: 6, session: 'AM' },
+  { id: 12, test_id: 6, session: 'PM' },
+  { id: 13, test_id: 7, session: 'AM' },
+  { id: 14, test_id: 7, session: 'PM' },
+  { id: 15, test_id: 8, session: 'AM' },
+  { id: 16, test_id: 8, session: 'PM' },
+  { id: 17, test_id: 9, session: 'AM' },
+  { id: 18, test_id: 9, session: 'PM' },
+  { id: 19, test_id: 10, session: 'AM' },
+  { id: 20, test_id: 10, session: 'PM' }
+])
