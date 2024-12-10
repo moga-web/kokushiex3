@@ -10,3 +10,5 @@ COPY Gemfile.lock /app/Gemfile.lock
 ENV RAILS_ENV=staging
 RUN bundle install
 COPY . /app
+
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "${PORT}"]
