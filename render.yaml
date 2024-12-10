@@ -3,13 +3,16 @@ databases:
     databaseName: kokushiex_staging
     user: kokushiex_for_PT
     region: singapore
+    plan: free
 
 services:
   - type: web
     name: kokushiex_for_PT
-    env: ruby
+    env: docker
     region: singapore
+    branch: develop
     plan: free
+    dockerfilePath: render/Dockerfile
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
