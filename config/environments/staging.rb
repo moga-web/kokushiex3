@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # stagingのデプロイ先
-    config.hosts << 'https://kokushiex3.onrender.com'
+    config.hosts << "kokushiex-for-pt.onrender.com"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
