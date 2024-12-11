@@ -46,4 +46,8 @@ class User < ApplicationRecord
     # ゲストユーザーのメールアドレスの型をチェック
     email.start_with?('guest_') && email.end_with?('@example.com')
   end
+
+  def not_guest?
+    !guest?
+  end
 end
