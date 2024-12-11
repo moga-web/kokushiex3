@@ -33,7 +33,9 @@ class Question < ApplicationRecord
 
   # questionに対応する回答を取得する
   def selected_option_numbers(examination)
-    user_responses = examination.user_responses.select { |response| response.choice.question_id == id }
+    user_responses = examination.user_responses.includes(:choice).select do |response|
+      response.choice.question_id == id
+    end
     user_responses.map { |response| response.choice.option_number }
   end
 
