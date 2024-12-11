@@ -229,6 +229,8 @@ GEM
     public_suffix (6.0.1)
     puma (6.5.0)
       nio4r (~> 2.0)
+    pundit (2.4.0)
+      activesupport (>= 3.0.0)
     racc (1.8.1)
     rack (3.1.8)
     rack-session (2.0.0)
@@ -416,6 +418,7 @@ DEPENDENCIES
   mysql2
   pg
   puma
+  pundit
   rails (= 7.2)
   rails-controller-testing
   rspec-rails
