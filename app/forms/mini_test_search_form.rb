@@ -17,6 +17,7 @@ class MiniTestSearchForm
                            .where(question_tags: { tag_id: tag_ids })
                            .distinct
                            .pluck(:id)
-    Question.random_questions(question_ids, question_count)
+    Question.includes(:tags, :choices, test_session: :test)
+            .random_questions(question_ids, question_count)
   end
 end
