@@ -2,6 +2,7 @@ class MiniTestsController < ApplicationController
   before_action :authenticate_user!
   def index
     form = MiniTestSearchForm.new(params)
+    authorize :mini_test, :index?
     if form.valid?
       @questions = form.search
       @user_responses = []
