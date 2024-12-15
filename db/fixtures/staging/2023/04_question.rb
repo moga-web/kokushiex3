@@ -274,7 +274,7 @@ Question.seed(:id, [
   { id: 107, test_session_id: 2, question_number: 7,
     content: '75 歳の男性。一人暮らし。歩行時のふらつきを主訴に来院した。以前から食事が不規則で、5日前から食事を摂らなくなった。上肢に明らかな異常はないが、下肢筋力は MMT4レベルで、下肢遠位優位のしびれ感がある。膝蓋腱反射は亢進している
       が、アキレス腱反射は低下し、Babinski反射は陽性だった。眼振は認めない。血清ビタミン B12 の低下を認めた。重心動揺検査結果（別冊No. 3）を別に示す。この患者の左右へのバランス障害に対する踵の補正で適切なのはどれか。',
-      image_url: 'images/question_58p6.png' },
+      image_url: 'images/question_58p7.png' },
   { id: 108, test_session_id: 2, question_number: 8,
     content: '6 歳の女児。公園で転倒し、骨折の診断で同日緊急手術を受けた。術後のエックス線写真（別冊No. 4）を別に示す。術後の患側上肢の理学療法で正しいのはどれか。',
     image_url: 'images/question_58p8.png' },
